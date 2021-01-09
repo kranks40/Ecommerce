@@ -8,14 +8,14 @@ html {
 body {
   margin: 0;
   height: 100vh;
-  font-size: 1.6rem;
+  font-size: 16px;
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  height: 1005;
+  height: 100vh;
 }
 
 /*  Layout */
@@ -34,7 +34,7 @@ header {
 
 main {
   grid-area: main;
-  padding: 1rem;
+  padding: 10px;
 }
 
 footer {
@@ -45,13 +45,13 @@ footer {
 
 /* Common */
 h1 {
-  font-size: 1.8rem;
-  padding: 1rem 0;
+  font-size: 18px;
+  padding: 1px 0;
 }
 
 h2 {
-  font-size: 1.6rem;
-  padding: 1rem 0;
+  font-size: 16px;
+  padding: 1px 0;
 }
 
 a {
@@ -93,16 +93,21 @@ img {
 }
 
 img.medium {
-  max-width: 290px;
+  max-width: 250px;
   width: 100%;
 }
 
 /* card */
 .card {
-  border: 0.1rem #c0c0c0 solid;
+  border: 1px #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 5px;
   margin: 10px;
+  transition: transform 150ms ease-in;
+}
+
+.card:hover {
+  transform: scale(1.07);
 }
 
 .card-body {
@@ -110,7 +115,7 @@ img.medium {
 }
 
 .card-body > * {
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 .price {

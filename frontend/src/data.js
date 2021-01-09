@@ -19,7 +19,7 @@ const data = {
             price: 250,
             brand: 'Adidas',
             rating: 3.5,
-            numReviews: 10,
+            numReviews: 14,
             description: 'High quality product',
         },
         {
@@ -30,7 +30,7 @@ const data = {
             price: 400,
             brand: 'Nike',
             rating: 4.0,
-            numReviews: 10,
+            numReviews: 11,
             description: 'High quality product',
         },
         {
@@ -52,7 +52,7 @@ const data = {
             price: 100,
             brand: 'Puma',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 20,
             description: 'High quality product',
         },
         {
