@@ -193,7 +193,7 @@ img.large {
   color: #32cb00;
 }
 
-.error {
+.dander {
   color: #ec1f26;
 }
 
@@ -204,5 +204,22 @@ img.large {
   margin: 10px;
   padding: 15px;
 }
+
+.alert {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+
+.alert-danger {
+  color: #a02020;
+  background-color: #ffe0e0e0;
+}
+
 
 
