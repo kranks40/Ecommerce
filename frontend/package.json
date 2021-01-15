@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "ecommerce",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -37,5 +37,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "1.\tIntroduction to this course i.\twhat you will build ii.\twhat you will learn iii.\twho are audiences",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "Oketo Peters",
+  "license": "ISC"
 }

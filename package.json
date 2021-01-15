@@ -1,0 +1,26 @@
+{
+  "name": "ecommerce",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "1.\tInstall Tools\r i.\tCode Editor\r ii.\tWeb Browser\r iii.\tVS Code Extension",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kranks40/Ecommerce.git"
+  },
+  "author": "Oketo Peters",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kranks40/Ecommerce/issues"
+  },
+  "homepage": "https://github.com/kranks40/Ecommerce#readme"
+}
