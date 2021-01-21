@@ -1,7 +1,7 @@
 1. Install Tools
         i. Code Editor
-    ii. Web Browser
-    iii. VS Code Extension
+        ii. Web Browser
+        iii. VS Code Extension
 
 2. Website Template
         i. Create amazona folder
