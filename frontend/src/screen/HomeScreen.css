@@ -1,0 +1,20 @@
+/* Card */
+.card {
+    border: 1px #c0c0c0 solid;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    margin: 10px;
+    transition: transform 150ms ease-in-out;
+  }
+  
+  .card:hover {
+    transform:scale(1.05);
+  }
+  
+  .card-body {
+    padding: 10px
+  }
+  
+  .card-body > * {
+    margin-bottom: 5px;
+  }

@@ -1,31 +1,21 @@
 {
-  "name": "ecommerce",
+  "name": "amazona",
   "type": "module",
   "version": "1.0.0",
-  "description": "1.\tInstall Tools\r i.\tCode Editor\r ii.\tWeb Browser\r iii.\tVS Code Extension",
   "main": "index.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.17.0",
-    "eslint-plugin-react": "^7.22.0",
-    "nodemon": "^2.0.7"
-  },
   "scripts": {
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js "
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kranks40/Ecommerce.git"
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "author": "Oketo Peters",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kranks40/Ecommerce/issues"
+  "dependencies": {
+    "express": "^4.17.1",
+    "redux-thunk": "^2.3.0"
   },
-  "homepage": "https://github.com/kranks40/Ecommerce#readme"
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
+    "nodemon": "^2.0.7"
+  },
+  "description": ""
 }
