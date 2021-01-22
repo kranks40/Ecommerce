@@ -32,7 +32,7 @@ function HomeScreen() {
             ) :  ( 
             <div className="row center">
                 {/* products here is being used from the backend */}
-            { products.map(product => (
+            { products.map((product) => (
             <Product key={product._id} product={product} />
             ))}
             </div>
