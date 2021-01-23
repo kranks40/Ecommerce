@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import CartScreen from './screen/CartScreen';
 
 import HomeScreen from './screen/HomeScreen';
 import ProductScreen from './screen/ProductScreen';
@@ -18,6 +19,7 @@ function App() {
         </div>
     </header>
     <main>
+      <Route path ='/cart/:id?' component={CartScreen} />
       <Route path='/product/:id' component={ProductScreen}  />
       <Route path='/' component={HomeScreen} exact />      
     </main>
