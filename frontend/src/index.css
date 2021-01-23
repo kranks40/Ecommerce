@@ -63,6 +63,15 @@ a.brand {
   font-weight: bold;
 }
 
+.badge {
+  background-color: #f02020;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -105,8 +114,6 @@ img.large {
   width: 100%;
 }
 
-
-
 .price {
   font-size: 20px;
 }
@@ -120,6 +127,8 @@ img.large {
 .rating span:last-child {
   color: #242424;
 }
+
+
 
 
 

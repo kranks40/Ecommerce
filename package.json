@@ -9,6 +9,8 @@
   "author": "Oketo Peters",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "express": "^4.17.1",
     "redux-thunk": "^2.3.0"
   },

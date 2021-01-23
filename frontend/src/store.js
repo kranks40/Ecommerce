@@ -3,8 +3,15 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 
 
 import  { productListReducer, productDetailsReducer } from './reducers/productReducers';
+import { cartReducer } from './reducers/cartReducers';
 
-const initialState = {};
+const initialState = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
+  },
+};
 
 /*redux thunk sends ajax request to redux action */
 
@@ -13,6 +20,7 @@ then it returns a new state */
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
+    cart: cartReducer,
 });
 
 /* createstore accepts reducer and initialstate */
