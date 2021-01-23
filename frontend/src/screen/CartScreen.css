@@ -10,4 +10,9 @@ img.small {
 
 .delete {
     font-size: 25px !important;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: #3CAE2B;
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
 import "./CartScreen.css";
 
@@ -22,8 +22,10 @@ function CartScreen(props) {
       dispatch(addToCart(productId, qty));
     }
   }, [dispatch, productId, qty]);
+
   const removeFromCartHandler = (id) => {
     //delete action
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -98,9 +100,9 @@ function CartScreen(props) {
                 type="button"
                 onClick={checkoutHandler}
                 className="primary block"
-                disabled={cart.length === 0}
+                disabled={cartItems.length === 0}
               >
-                Proceed to chexkout
+                Proceed to checkout
               </button>
             </li>
           </ul>

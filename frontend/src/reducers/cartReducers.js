@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
     switch(action.type) {
@@ -29,6 +29,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
             //is added then the cart would show 3 items in cart
             return { ...state, cartItems: [...state.cartItems, item] };
         }
+        case CART_REMOVE_ITEM:
+            // cart properties are not changed by adding ...state from cartItems
+            //then the products in action payload would be filtered out by a function
+            //if x.product does not equal to action.payload then return true
+            //and item should be added to cartItem
+            return { ...state, cartItems: state.cartItems.filter(x => x.product !== action.payload),};
         default:
             return state;
     }
