@@ -1,0 +1,13 @@
+
+img.small {
+    max-width: 50px;
+    width: 100%;
+}
+
+.min-30 {
+    min-width: 300px;
+}
+
+.delete {
+    font-size: 25px !important;
+}
