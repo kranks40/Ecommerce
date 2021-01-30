@@ -40,7 +40,7 @@ function SigninScreen(props) {
 
   return (
     <div>
-      <form className="form" onSubmit={submitHandler}>
+      <form className="signin__form" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
         </div>
@@ -70,10 +70,10 @@ function SigninScreen(props) {
           ></input>
         </div>
 
-        <div>
+        <div className='login__button'>
           <label />
           <Button className="primary" type="submit">
-            Sign In
+            <h2>Sign In</h2>
           </Button>
         </div>
 

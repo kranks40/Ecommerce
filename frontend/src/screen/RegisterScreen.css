@@ -1,26 +1,26 @@
-.signin__form {
+.register__form {
     max-width: 600px;
     margin: 0 auto;
 }
 
-.signin__form > div {
+.register__form > div {
     display: flex;
     flex-direction: column;
     margin: 10px;
 }
 
-.signin__form label {
+.register__form label {
     margin: 10px 0;
     display: block;
 }
 
-.login__button > button {
+.register__button > button {
     border-radius: 5px;
     height: 40px;
     text-transform: inherit;
     border: 1px solid;
 }
 
-.login__button > button:hover {
+.register__button > button:hover {
     background-color: #F2C85F;
 }

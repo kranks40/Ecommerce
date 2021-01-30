@@ -7,6 +7,7 @@ import { register } from "../actions/userActions";
 import { useEffect } from "react";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import './RegisterScreen.css';
 
 function RegisterScreen(props) {
   const [name, setName] = useState("");
@@ -46,7 +47,7 @@ function RegisterScreen(props) {
 
   return (
     <div>
-      <form className="form" onSubmit={submitHandler}>
+      <form className="register__form" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>
         </div>
@@ -98,10 +99,10 @@ function RegisterScreen(props) {
           ></input>
         </div>
 
-        <div>
+        <div className='register__button'>
           <label />
           <Button className="primary" type="submit">
-            Register
+            <h2>Register</h2>
           </Button>
         </div>
 
