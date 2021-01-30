@@ -6,6 +6,7 @@ import ShoppingCartSharpIcon from '@material-ui/icons/ShoppingCartSharp';
 import CartScreen from './screen/CartScreen';
 import HomeScreen from './screen/HomeScreen';
 import ProductScreen from './screen/ProductScreen';
+import SigninScreen from './screen/SigninScreen';
 
 function App() {
   const cart = useSelector(state => state.cart);
@@ -31,6 +32,7 @@ function App() {
     <main>
       <Route path ='/cart/:id?' component={CartScreen} />
       <Route path='/product/:id' component={ProductScreen}  />
+      <Route path='/signin' component={SigninScreen}  />
       <Route path='/' component={HomeScreen} exact />      
     </main>
     <footer className="row center">@2021 All right reserved</footer>

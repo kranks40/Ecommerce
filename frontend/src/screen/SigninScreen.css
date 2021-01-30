@@ -1,0 +1,15 @@
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.form label {
+    margin: 10px 0;
+    display: block;
+}
