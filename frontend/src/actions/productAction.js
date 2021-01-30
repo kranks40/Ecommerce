@@ -28,6 +28,8 @@ export const detailsProduct = (productId) => async (dispatch) => {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload:
+      //check if response and message exist then return a message otherwise 
+      //return general message
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,

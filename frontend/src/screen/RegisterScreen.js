@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
-import "./SigninScreen.css";
-import { signin } from "../actions/userActions";
+import { register } from "../actions/userActions";
 import { useEffect } from "react";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
-function SigninScreen(props) {
+function RegisterScreen(props) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   //return query string if it does exist from props.location.search
   //split string by question mark and get the second value if it does not
@@ -20,15 +21,20 @@ function SigninScreen(props) {
     ? props.location.search.split("=")[1]
     : "/";
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo, loading, error } = userSignin;
+  const userRegister = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userRegister;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     //prevent form from refreshing the page
     e.preventDefault();
-    dispatch(signin(email, password));
-  };
+    //if password is not equal to confirm password return error message
+    //else return first code
+    if (password !== confirmPassword) {
+      alert('Password don"t match');
+    } else {
+    dispatch(register(name, email, password));
+  }};
 
   useEffect(() => {
     //if userInfo contains value it means that the login was successful
@@ -42,11 +48,22 @@ function SigninScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1>Create Account</h1>
         </div>
         {/* if loading is true then show loadingbox and if error is true show messagebox */}
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
+
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter Name"
+            required
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+        </div>
 
         <div>
           <label htmlFor="email">Email address</label>
@@ -71,25 +88,33 @@ function SigninScreen(props) {
         </div>
 
         <div>
+          <label htmlFor="confirmpassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmpassword"
+            placeholder="Enter confirm password"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></input>
+        </div>
+
+        <div>
           <label />
           <Button className="primary" type="submit">
-            Sign In
+            Register
           </Button>
         </div>
 
         <div>
           <label />
           <div>
-            New customer?{" "}
-            {/* this would pass the redirect to register */}
-            <Link to={`/register?redirect${redirect}`}>
-              Create your Account
-            </Link>
+            Already have an account ?{" "}
+            {/* this would pass the redirect to the signin */}
+            <Link to={`/signin?redirect${redirect}`}>Sign-In</Link>
           </div>
         </div>
       </form>
     </div>
   );
 }
-
-export default SigninScreen;
+export default RegisterScreen;
