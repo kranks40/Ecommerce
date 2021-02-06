@@ -1,0 +1,50 @@
+.shipping__form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.shipping__form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.shipping__form label {
+    margin: 10px 0;
+    display: block;
+}
+
+.shipping__button > button {
+    border-radius: 5px;
+    height: 40px;
+    text-transform: inherit;
+    border: 1px solid;
+}
+
+.shipping__button > button:hover {
+    background-color: #F2C85F;
+}
+
+.address {
+    margin-top: 5px;
+}
+
+.shipping__form > .city > .postalcode {
+    flex-direction: column;
+}
+
+.city {
+    position: relative;
+    max-width: 100px;
+    margin: 10px 0;
+    display: block;
+
+}
+
+.postalcode {
+    position: relative;
+    max-width: 100px;
+    margin: 10px 0;
+    display: block;
+    flex: 1;
+}
