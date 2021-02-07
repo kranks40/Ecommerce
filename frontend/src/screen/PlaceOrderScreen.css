@@ -1,0 +1,18 @@
+.placeOrder {
+    border: 1px #c0c0c0 solid;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+}
+
+.order__button > button {
+    border-radius: 5px;
+    height: 40px;
+    text-transform: inherit;
+    border: 1px solid;
+}
+
+.order__button > button:hover {
+    background-color: #F2C85F;
+}
