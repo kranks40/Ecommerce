@@ -1,0 +1,26 @@
+.payment__form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.payment__form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.payment__form label {
+    margin: 10px 0;
+    /* display: block; */
+}
+
+.payment__button > button {
+    border-radius: 5px;
+    height: 40px;
+    text-transform: inherit;
+    border: 1px solid;
+}
+
+.payment__button > button:hover {
+    background-color: #F2C85F;
+}
