@@ -1,16 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Checkout from "../components/Checkout";
 import "./PlaceOrderScreen.css";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import { createOrder } from "../actions/orderActins";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
     props.history.push("/payment");
   }
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, success, error, order } = orderCreate;
   //num.tofixed convert number to string data then Number converts the srting to integer
   const toPrice = (num) => Number(num.toFixed(2));
   //To calculate price item in the cart use reduce function to calculate the sum of the cart items
@@ -22,9 +29,19 @@ function PlaceOrderScreen(props) {
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.shippingPrice + cart.itemsPrice + cart.taxPrice;
 
-  const placeOrderHandler = (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
+  const placeOrderHandler = () => {
+    // e.preventDefault();
+    //use all fields of cart object and replace cartItems with orderItems
+    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
   };
+  useEffect(() => {
+    //if success is true the order created was successful then redirect user to order details screen then reset the basket to empty
+    if (success) {
+      props.history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [dispatch, order, props.history, success]);
 
   return (
     <div>
@@ -136,6 +153,9 @@ function PlaceOrderScreen(props) {
                   </Button>
                 </li>
               </div>
+                {/* check if loading is true then rednder loadingbox component. check error and if exist render messagebox component */}
+                {loading && <LoadingBox />}
+                {error && <MessageBox variant='danger'>{error}</MessageBox>}
             </ul>
           </div>
         </div>
