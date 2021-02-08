@@ -2,6 +2,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import orderRouter from './routers/orderRouter.js';
 
 import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
@@ -21,8 +22,9 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
   useCreateIndex: true,
 });
 
-app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
 app.get('/', (req, res) => {
   res.send('Server is ready');
 });
