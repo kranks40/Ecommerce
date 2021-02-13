@@ -12,6 +12,7 @@ import RegisterScreen from "./screen/RegisterScreen";
 import ShippingAddressScreen from "./screen/ShippingAddressScreen";
 import PaymentScreen from "./screen/PaymentScreen";
 import PlaceOrderScreen from "./screen/PlaceOrderScreen";
+import OrderScreen from "./screen/OrderScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -30,7 +31,7 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              amazona
+              Ketoranks
             </Link>
           </div>
           <div>
@@ -69,6 +70,7 @@ function App() {
           <Route path="/shipping" component={ShippingAddressScreen} />
           <Route path="/payment" component={PaymentScreen} />
           <Route path="/placeorder" component={PlaceOrderScreen} />
+          <Route path="/order/:id" component={OrderScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">@2021 All right reserved</footer>

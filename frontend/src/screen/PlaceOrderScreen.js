@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkout from "../components/Checkout";
 import "./PlaceOrderScreen.css";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { createOrder } from "../actions/orderActins";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import LoadingBox from '../components/LoadingBox';
@@ -31,7 +31,6 @@ function PlaceOrderScreen(props) {
 
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
-    // e.preventDefault();
     //use all fields of cart object and replace cartItems with orderItems
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
   };
@@ -144,6 +143,7 @@ function PlaceOrderScreen(props) {
               <div>
                 <li className="order__button">
                   <Button
+                    variant='contained'
                     type="button"
                     onClick={placeOrderHandler}
                     className="primary block"

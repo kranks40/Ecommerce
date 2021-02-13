@@ -31,4 +31,17 @@ orderRouter.post(
   })
 );
 
+orderRouter.get(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    //get the order from database using await and name of order. findbyid methed is used from mongoose.check if order exist or not, if it exist send the order otherwise send an error
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
+  })
+);
 export default orderRouter;
