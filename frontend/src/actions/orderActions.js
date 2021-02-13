@@ -15,20 +15,20 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await Axios.post("/api/orders", order, {
+    const { data } = await Axios.post('/api/orders', order, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     });
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem('cartItems');
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
       payload:
-        error.reponse && error.reponse.data.message
-          ? error.reponse.data.message
+        error.response && error.response.data.message
+          ? error.response.data.message
           : error.message,
     });
   }
@@ -43,7 +43,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     const { data } = await Axios.get(`/api/orders/${orderId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
       //if error from application exist use it otherwise use general error like network error

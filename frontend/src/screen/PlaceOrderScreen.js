@@ -5,10 +5,10 @@ import Checkout from "../components/Checkout";
 import "./PlaceOrderScreen.css";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { createOrder } from "../actions/orderActins";
+import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -143,7 +143,7 @@ function PlaceOrderScreen(props) {
               <div>
                 <li className="order__button">
                   <Button
-                    variant='contained'
+                    variant="contained"
                     type="button"
                     onClick={placeOrderHandler}
                     className="primary block"
@@ -153,9 +153,9 @@ function PlaceOrderScreen(props) {
                   </Button>
                 </li>
               </div>
-                {/* check if loading is true then rednder loadingbox component. check error and if exist render messagebox component */}
-                {loading && <LoadingBox />}
-                {error && <MessageBox variant='danger'>{error}</MessageBox>}
+              {/* check if loading is true then rednder loadingbox component. check error and if exist render messagebox component */}
+              {loading && <LoadingBox />}
+              {error && <MessageBox variant="danger">{error}</MessageBox>}
             </ul>
           </div>
         </div>

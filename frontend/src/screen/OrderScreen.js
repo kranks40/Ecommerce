@@ -1,22 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {PayPalButton} from 'react-paypal-button-v2';
 import { useDispatch, useSelector } from "react-redux";
+
 
 import "./OrderScreen.css";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { detailsOrder } from "../actions/orderActins";
+import { detailsOrder } from "../actions/orderActions";
+import Axios from "axios";
 
 function OrderScreen(props) {
   const orderId = props.match.params.id;
-  const
+  const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+    const addPaypalScript = async () => {
+      const { data } = await Axios.get("/api/config.paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+    //if order._id does not exist means the order is not loaded otherwise if order is paid is false
+    //check to see if the papyal window is already loaded. If payapl window is not loaded then call addPaypalScript function otherwise set sdkReady to true
+    if (!order.id) {
+      dispatch(detailsOrder(orderId));
+    } else {
+      if (!order.isPaid) {
+        if (!window.paypal) {
+          addPaypalScript();
+        } else {
+          setSdkReady(true);
+        }
+      }
+    }
+  }, [dispatch, order, orderId, sdkReady]);
+
+  const successPaymentHandler = () => {
+    
+  }
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -29,7 +59,7 @@ function OrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="Order">
+              <div className="order">
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:</strong>
@@ -134,6 +164,21 @@ function OrderScreen(props) {
                   </div>
                 </div>
               </li>
+              {/* create a conditional rendering to check if order.ispaid is false 
+              // then render a jsx element to check if sdkready is false therfore 
+              // loadingbox would be rendered, otherwise show paypal button */}
+              {!order.isPaid && (
+                <li>
+                  {!sdkReady ? (
+                    <LoadingBox></LoadingBox>
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    ></PayPalButton>
+                  )}
+                </li>
+              )}
             </ul>
           </div>
         </div>
