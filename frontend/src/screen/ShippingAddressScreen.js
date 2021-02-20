@@ -61,14 +61,14 @@ function ShippingAddressScreen(props) {
             onChange={(e) => setAddress(e.target.value)}
           ></input>
 
-          <input
+          {/* <input
             className="address"
             type="text"
             placeholder="Apt, suite, unit, building, floor, etc."
             value={address}
             required
             onChange={(e) => setAddress(e.target.value)}
-          ></input>
+          ></input> */}
         </div>
 
         <div className="city">

@@ -15,6 +15,7 @@ function OrderScreen(props) {
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
   const orderPay = useSelector((state) => state.orderPay);
   const {
     loading: loadingPay,
@@ -24,7 +25,7 @@ function OrderScreen(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const addPaypalScript = async () => {
+    const addPayPalScript = async () => {
       const { data } = await Axios.get("/api/config/paypal");
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -43,7 +44,7 @@ function OrderScreen(props) {
     } else {
       if (!order.isPaid) {
         if (!window.paypal) {
-          addPaypalScript();
+          addPayPalScript();
         } else {
           setSdkReady(true);
         }
@@ -66,15 +67,14 @@ function OrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="order">
+              <div className="Order">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong>
-                  {order.ShippingAddress.fullName} <br />
-                  <strong>Address:</strong>
-                  {order.ShippingAddress.address},{order.ShippingAddress.city},
-                  {order.ShippingAddress.postalCode},
-                  {order.ShippingAddress.country}
+                  <strong>Name:</strong> {order.ShippingAddress.fullName} <br />
+                  <strong>Address:</strong> {order.ShippingAddress.address},{' '}
+                  {order.ShippingAddress.city},{' '}
+                  {order.ShippingAddress.postalCode},{' '}
+                  {order.ShippingAddress.country}{' '}
                 </p>
                 {order.isDelivered ? (
                   <MessageBox variant="success">
@@ -90,8 +90,7 @@ function OrderScreen(props) {
               <div className="Order">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong>
-                  {order.paymentMethod}
+                  <strong>Method:</strong> {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
                   <MessageBox variant="success">
@@ -124,7 +123,7 @@ function OrderScreen(props) {
                         </div>
 
                         <div>
-                          {item.qty} x ${item.price} = {item.qty * item.price}
+                          {item.qty} x ${item.price} = ${item.qty * item.price}
                         </div>
                       </div>
                     </li>
@@ -163,10 +162,10 @@ function OrderScreen(props) {
 
               <li>
                 <div className="row">
-                  <div>
-                    <strong>Order Total</strong>
+                  <div className='total'>
+                    <strong>Payment Total</strong>
                   </div>
-                  <div>
+                  <div className='total'>
                     <strong>${order.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>

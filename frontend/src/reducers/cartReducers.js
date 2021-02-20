@@ -47,7 +47,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 
     case CART_SAVE_SHIPPING_ADDRESS:
       //return previous state and update shipping Address to action payload
-      return { ...state, shippingAddress: action.payload };
+      return { ...state, ShippingAddress: action.payload };
 
     case CART_SAVE_PAYMENT_METHOD:
       return { ...state, paymentMethod: action.payload };

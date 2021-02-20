@@ -13,6 +13,7 @@ import {
 import {
   orderCreateReducer,
   orderDetailsReducer,
+  orderMyListReducer,
   orderPayReducer,
 } from "./reducers/orderReducers";
 
@@ -30,8 +31,8 @@ const initialState = {
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
     //check localstorage for shipping address if it does exist convert it to javascript object otherwise use empty object
-    ShippingAddress: localStorage.getItem("shippingAddress")
-      ? JSON.parse(localStorage.getItem("shippingAddress"))
+    ShippingAddress: localStorage.getItem("ShippingAddress")
+      ? JSON.parse(localStorage.getItem("ShippingAddress"))
       : {},
     paymentMethod: "PayPal",
   },
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  orderMyList: orderMyListReducer,
 });
 
 /* createstore accepts reducer and initialstate */
