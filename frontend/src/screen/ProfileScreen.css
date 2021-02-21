@@ -1,0 +1,26 @@
+.profile__form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile__form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.profile__form label {
+    margin: 10px 0;
+    display: block;
+}
+
+.profile__button > button {
+    border-radius: 5px;
+    height: 40px;
+    text-transform: inherit;
+    border: 1px solid;
+}
+
+.profile__button > button:hover {
+    background-color: #F2C85F;
+}
