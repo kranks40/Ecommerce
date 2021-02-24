@@ -23,8 +23,7 @@ function HomeScreen() {
 
     return (
         <div>
-            {/* if loading is true render loadingbox 
-            else if error exist render messagebox else render product list*/}
+            {/* if loading is true render loadingbox else if error exist render messagebox else render product list*/}
             {loading ? ( 
             <LoadingBox></LoadingBox>
             ) : error ? (
