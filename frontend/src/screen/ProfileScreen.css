@@ -14,13 +14,13 @@
     display: block;
 }
 
-.profile__button > button {
+.update__button button {
     border-radius: 5px;
     height: 40px;
     text-transform: inherit;
     border: 1px solid;
 }
 
-.profile__button > button:hover {
+.update__button button:hover {
     background-color: #F2C85F;
 }

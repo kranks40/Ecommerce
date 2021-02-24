@@ -75,10 +75,10 @@ function SigninScreen(props) {
           <Button className="primary" type="submit">
             <h2>Sign In</h2>
           </Button>
+          <label />
         </div>
 
         <div>
-          <label />
           <div>
             New customer?{" "}
             {/* this would pass the redirect to register */}
