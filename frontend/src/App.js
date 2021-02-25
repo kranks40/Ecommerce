@@ -72,15 +72,15 @@ function App() {
           </div>
         </header>
         <main>
-          <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/signin" component={SigninScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/shipping" component={ShippingAddressScreen} />
-          <Route path="/payment" component={PaymentScreen} />
-          <Route path="/placeorder" component={PlaceOrderScreen} />
-          <Route path="/order/:id" component={OrderScreen} />
-          <Route path="/orderhistory" component={OrderHistoryScreen} />
+          <Route path="/cart/:id?" component={CartScreen} />
+          <PrivateRoute path="/shipping" component={ShippingAddressScreen} />
+          <PrivateRoute path="/payment" component={PaymentScreen} />
+          <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
+          <PrivateRoute path="/order/:id" component={OrderScreen} />
+          <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
           <PrivateRoute path='/userprofile' component={ProfileScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
