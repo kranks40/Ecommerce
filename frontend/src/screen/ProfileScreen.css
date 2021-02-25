@@ -17,6 +17,7 @@
 .update__button button {
     border-radius: 5px;
     height: 40px;
+    width: 100%;
     text-transform: inherit;
     border: 1px solid;
 }

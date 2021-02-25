@@ -118,7 +118,7 @@ function ProfileScreen() {
             <div className="update__button">
               <label>
                 <Button className="primary" type="submit">
-                  Update
+                  <h1>Update</h1>
                 </Button>
               </label>
             </div>
