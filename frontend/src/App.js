@@ -16,6 +16,8 @@ import OrderScreen from "./screen/OrderScreen";
 import OrderHistoryScreen from "./screen/OrderHistoryScreen";
 import ProfileScreen from "./screen/ProfileScreen";
 import PrivateRoute from "./components/PrivateRoute";
+import ProductListScreen from "./screen/ProductListScreen";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -54,10 +56,10 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to ='/userprofile'>User Profile</Link>
+                    <Link to="/userprofile">User Profile</Link>
                   </li>
                   <li>
-                    <Link to ='/orderhistory'>Order History</Link>
+                    <Link to="/orderhistory">Order History</Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={signoutHandler}>
@@ -68,6 +70,31 @@ function App() {
               </div>
             ) : (
               <Link to="/signin">Sign In</Link>
+            )}
+            {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin */}
+            {userInfo && userInfo.isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Admin <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to='/dashbord'>Dashboard</Link>
+                  </li>
+
+                  <li>
+                    <Link to='/productlist'>Products</Link>
+                  </li>
+
+                  <li>
+                    <Link to='/orderlist'>Orders</Link>
+                  </li>
+
+                  <li>
+                    <Link to='/userlist'>Users</Link>
+                  </li>
+                </ul>
+              </div>
             )}
           </div>
         </header>
@@ -81,7 +108,8 @@ function App() {
           <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
-          <PrivateRoute path='/userprofile' component={ProfileScreen} />
+          <PrivateRoute path="/userprofile" component={ProfileScreen} />
+          <AdminRoute path="/productlist" component={ProductListScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">@2021 All right reserved</footer>

@@ -39,6 +39,16 @@ export const isAuth = (req, res, next) => {
       }
     );
   } else {
-      res.status(401).send({message: 'No Token' });
+    res.status(401).send({ message: "No Token" });
+  }
+};
+
+export const isAdmin = (req, res, next) => {
+  //To protect admin route in backend you add a middleware isAdmin.
+  //Check if req.user and req.user.isadmin is true then pass to the next middleware otherwise render error message
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid Admin Token" });
   }
 };
