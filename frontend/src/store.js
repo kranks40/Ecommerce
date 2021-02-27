@@ -4,6 +4,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import {
   productListReducer,
   productDetailsReducer,
+  productCreateReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   orderMyList: orderMyListReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  productCreate: productCreateReducer,
 });
 
 /* createstore accepts reducer and initialstate */

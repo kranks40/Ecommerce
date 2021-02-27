@@ -99,7 +99,7 @@ function App() {
           </div>
         </header>
         <main>
-          <Route path="/product/:id" component={ProductScreen} />
+          <Route path="/product/:id" component={ProductScreen} exact />
           <Route path="/signin" component={SigninScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
