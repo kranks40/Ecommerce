@@ -5,6 +5,7 @@ import {
   productListReducer,
   productDetailsReducer,
   productCreateReducer,
+  productUpdateReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
@@ -58,6 +59,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
 });
 
 /* createstore accepts reducer and initialstate */

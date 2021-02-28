@@ -69,7 +69,7 @@ function ProductListScreen(props) {
                 <td>{product._id}</td>
                 <td>{product.name}</td>
                 <td>{product.price}</td>
-                <td>{product.catergory}</td>
+                <td>{product.category}</td>
                 <td>{product.brand}</td>
                 <td className='row__button'>
                   <Button

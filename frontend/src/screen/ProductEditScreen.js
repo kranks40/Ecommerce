@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../node_modules/@material-ui/core/index";
 
-import { detailsProduct } from "../actions/productAction";
+import { detailsProduct, updateProduct } from "../actions/productAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import "./ProductEditScreen.css";
 
 function ProductEditScreen(props) {
@@ -22,10 +23,17 @@ function ProductEditScreen(props) {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productUpdate = useSelector(state => state.productUpdate);
+  const {loading: loadingUpdate, error: errorUpdate, success: successUpdate} = productUpdate;
+
   const dispatch = useDispatch();
   useEffect(() => {
+    if(successUpdate){
+      props.history.push('/productlist')
+    }
     //if product does not exsit or if product exist and it's id is not equal to it's productId dispatch detailsproduct again
-    if (!product || product._id !== productId) {
+    if (!product || product._id !== productId || successUpdate) {
+      dispatch({type: PRODUCT_UPDATE_RESET})
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
@@ -36,10 +44,22 @@ function ProductEditScreen(props) {
       setBrand(product.brand);
       setDescription(product.description);
     }
-  }, [dispatch, productId, product]);
+  }, [dispatch, productId, product, successUpdate, props.history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        category,
+        brand,
+        countInStock,
+        description,
+      })
+    );
   };
 
   return (
@@ -48,6 +68,8 @@ function ProductEditScreen(props) {
         <div>
           <h1>Edit Prduct {productId}</h1>
         </div>
+        {loadingUpdate && <LoadingBox></LoadingBox>}
+        {errorUpdate && <MessageBox variant='danger'>{errorUpdate}</MessageBox>}
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
