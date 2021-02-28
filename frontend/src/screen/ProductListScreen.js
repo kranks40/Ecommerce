@@ -36,7 +36,7 @@ function ProductListScreen(props) {
   };
 
   return (
-    <div className="body">
+    <div>
       <div className="row">
         <h1>Products</h1>
         <Button type="button" className="create" onClick={createHandler}>
