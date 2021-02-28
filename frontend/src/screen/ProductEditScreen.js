@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../node_modules/@material-ui/core/index";
+import Axios from "axios";
 
 import { detailsProduct, updateProduct } from "../actions/productAction";
 import LoadingBox from "../components/LoadingBox";
@@ -23,17 +24,21 @@ function ProductEditScreen(props) {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const productUpdate = useSelector(state => state.productUpdate);
-  const {loading: loadingUpdate, error: errorUpdate, success: successUpdate} = productUpdate;
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if(successUpdate){
-      props.history.push('/productlist')
+    if (successUpdate) {
+      props.history.push("/productlist");
     }
     //if product does not exsit or if product exist and it's id is not equal to it's productId dispatch detailsproduct again
     if (!product || product._id !== productId || successUpdate) {
-      dispatch({type: PRODUCT_UPDATE_RESET})
+      dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
@@ -62,6 +67,31 @@ function ProductEditScreen(props) {
     );
   };
 
+  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [errorUpload, setErrorUpload] = useState("");
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("image", file);
+    setLoadingUpload(true);
+    try {
+      const { data } = await Axios.post("/api/uploads", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      setImage(data);
+      setLoadingUpload(false);
+    } catch (error) {
+      setErrorUpload(error.message);
+      setLoadingUpload(false);
+    }
+  };
+
   return (
     <div>
       <form className="edit__form" onSubmit={submitHandler}>
@@ -69,7 +99,7 @@ function ProductEditScreen(props) {
           <h1>Edit Prduct {productId}</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
-        {errorUpdate && <MessageBox variant='danger'>{errorUpdate}</MessageBox>}
+        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -110,6 +140,18 @@ function ProductEditScreen(props) {
                 required
                 onChange={(e) => setImage(e.target.value)}
               ></input>
+            </div>
+
+            <div>
+              <label htmlFor="imagefile">Image File</label>
+              <input
+                type="file"
+                id="imagefile"
+                label="Choose Image"
+                onChange={uploadFileHandler}
+              ></input>
+              {loadingUpload && <LoadingBox></LoadingBox>}
+              {error && <MessageBox variant="danger">{errorUpload}</MessageBox>}
             </div>
 
             <div>
