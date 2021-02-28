@@ -76,7 +76,7 @@ function ProductListScreen(props) {
                     type="button"
                     className="small-edit"
                     onClick={() =>
-                      props.history.push(`/products/${product._id}/edit`)
+                      props.history.push(`/product/${product._id}/edit`)
                     }
                   >
                     Edit

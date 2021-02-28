@@ -24,8 +24,8 @@ function ProductEditScreen(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-      //if product does not exsit or if product exist and it's id is not equal to it's productId dispatch detailsproduct again
-    if (!product || (product._id !== productId)) {
+    //if product does not exsit or if product exist and it's id is not equal to it's productId dispatch detailsproduct again
+    if (!product || product._id !== productId) {
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
@@ -130,7 +130,7 @@ function ProductEditScreen(props) {
               <label htmlFor="description">Description</label>
               <textarea
                 type="text"
-                rows='3'
+                rows="3"
                 id="description"
                 placeholder="Enter Description"
                 value={description}
@@ -139,12 +139,12 @@ function ProductEditScreen(props) {
               ></textarea>
             </div>
 
-            <div className='update__button'>
-                <label>
-                <Button className='primary' type='submit'>
-                   <h2>Update</h2> 
+            <div className="update__button">
+              <label>
+                <Button className="primary" type="submit">
+                  <h2>Update</h2>
                 </Button>
-                </label>
+              </label>
             </div>
           </>
         )}

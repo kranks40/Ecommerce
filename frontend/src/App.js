@@ -100,11 +100,11 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} exact />
-          <Route path="/product/:id/edit" component={ProductEditScreen} />
+          <Route path="/product/:id/edit" component={ProductEditScreen} exact />
           <Route path="/signin" component={SigninScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/cart/:id?" component={CartScreen} />
           <PrivateRoute path="/shipping" component={ShippingAddressScreen} />
           <PrivateRoute path="/payment" component={PaymentScreen} />
           <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
