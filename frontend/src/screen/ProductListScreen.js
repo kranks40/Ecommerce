@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../../node_modules/@material-ui/core/index";
-import {createProduct, listProducts } from "../actions/productAction";
+import {
+  createProduct,
+  deleteProduct,
+  listProducts,
+} from "../actions/productAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import {
+  PRODUCT_CREATE_RESET,
+  PRODUCT_DELETE_RESET,
+} from "../constants/productConstants";
 import "./ProductListScreen.css";
 
 function ProductListScreen(props) {
@@ -18,18 +25,30 @@ function ProductListScreen(props) {
     success: successCreate,
     product: createdProduct,
   } = productCreate;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-      if(successCreate) {
-          dispatch({type: PRODUCT_CREATE_RESET});
-          props.history.push(`/product/${createdProduct._id}/edit`);
-      }
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      props.history.push(`/product/${createdProduct._id}/edit`);
+    }
+    if (successDelete) {
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    }
     dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate]);
+  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
 
-  const deleteHandler = () => {
-
+  const deleteHandler = (product) => {
+    if (window.confirm("Are you sure you want to delete product?"))
+    dispatch(deleteProduct(product._id));
   };
   const createHandler = () => {
     dispatch(createProduct());
@@ -43,9 +62,13 @@ function ProductListScreen(props) {
           Create Product
         </Button>
       </div>
+      {loadingDelete && <LoadingBox></LoadingBox>}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+
       {/* while loadingcreate render loadingbox, if there is an error render messageBox  */}
       {loadingCreate && <LoadingBox></LoadingBox>}
-      {errorCreate && <MessageBox variant='danger'>{errorCreate}</MessageBox>}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+
       {/* if data is loading show loadingBox otherwise show messageBox if there is an error otherwise render table */}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -71,7 +94,7 @@ function ProductListScreen(props) {
                 <td>{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
-                <td className='row__button'>
+                <td className="row__button">
                   <Button
                     type="button"
                     className="small-edit"
