@@ -1,14 +1,12 @@
-import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
-
-
+import express from "express";
+import expressAsyncHandler from "express-async-handler";
+import Order from "../models/orderModel.js";
+import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
 
 orderRouter.get(
-  '/mine',
+  "/mine",
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id });
@@ -17,11 +15,11 @@ orderRouter.get(
 );
 
 orderRouter.post(
-  '/',
+  "/",
   isAuth,
   expressAsyncHandler(async (req, res) => {
     if (req.body.orderItems.length === 0) {
-      res.status(400).send({ message: 'Cart is empty' });
+      res.status(400).send({ message: "Cart is empty" });
     } else {
       const order = new Order({
         orderItems: req.body.orderItems,
@@ -36,20 +34,20 @@ orderRouter.post(
       const createdOrder = await order.save();
       res
         .status(201)
-        .send({ message: 'New Order Created', order: createdOrder });
+        .send({ message: "New Order Created", order: createdOrder });
     }
   })
 );
 
 orderRouter.get(
-  '/:id',
+  "/:id",
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if (order) {
       res.send(order);
     } else {
-      res.status(404).send({ message: 'Order Not Found' });
+      res.status(404).send({ message: "Order Not Found" });
     }
   })
 );
@@ -69,10 +67,23 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
       const updatedOrder = await order.save();
-      res.send({ message: 'Order Paid', order: updatedOrder });
+      res.send({ message: "Order Paid", order: updatedOrder });
     } else {
-      res.status(404).send({ message: 'Order Not Found' });
+      res.status(404).send({ message: "Order Not Found" });
     }
+  })
+);
+
+orderRouter.get(
+  "/",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    // in the order model in backend there is a user field with an objectId
+    //that reference User. So by using populate it gets the id of user and
+    //loads the user information from user collection or table and only puts the name from that table or collection
+    const orders = await Order.find({}).populate("user", "name");
+    res.send(orders);
   })
 );
 export default orderRouter;
