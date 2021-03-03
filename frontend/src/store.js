@@ -21,6 +21,7 @@ import {
   orderDetailsReducer,
   orderMyListReducer,
   orderPayReducer,
+  orderDeleteReducer,
 } from "./reducers/orderReducers";
 
 const initialState = {
@@ -64,6 +65,7 @@ const reducer = combineReducers({
   productUpdate: productUpdateReducer,
   productDelete: productDeleteReducer,
   orderList: orderListReducer,
+  orderDelete: orderDeleteReducer,
 });
 
 /* createstore accepts reducer and initialstate */
