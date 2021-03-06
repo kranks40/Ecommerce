@@ -1,14 +1,11 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import Moment from 'moment';
+import moment from "moment";
 
 import Order from "../models/orderModel.js";
 import { isAdmin, isAuth } from "../utils.js";
 
-const orderRouter = express.Router();
-const yourDate =  new Date();
-const today = Date(yourDate).toLocaleString();
-
+const orderRouter = express.Router(); 
 
 orderRouter.get(
   "/mine",
@@ -64,7 +61,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isPaid = true;
-      order.paidAt = today;
+      order.paidAt = moment().format("ddd, MMMM DO YYYY");
       order.paymentResult = {
         id: req.body.id,
         status: req.body.status,
@@ -115,7 +112,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isDelivered = true;
-      order.deliveredAt = Date();
+      order.deliveredAt = moment().format("ddd, MMMM DO YYYY");;
       const updatedOrder = await order.save();
       res.send({ message: "Order Delivered", order: updatedOrder });
     } else {

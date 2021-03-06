@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import path from 'path';
+import path from "path";
 
 import orderRouter from "./routers/orderRouter.js";
 import productRouter from "./routers/productRouter.js";
@@ -32,9 +32,13 @@ app.get("/api/config/paypal", (req, res) => {
 //path.resolve return current folder, it would be save in the _dirname, then it's used to concatenate the current folder to the uploads folder.
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-app.get("/", (req, res) => {
-  res.send("Server is ready");
-});
+app.use(express.static(path.join(__dirname, "frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
+// app.get("/", (req, res) => {
+//   res.send("Server is ready");
+// });
 
 //this middleware is an error catcher when there is an error in the router using expressAsyncHandler
 app.use((err, req, res, next) => {
