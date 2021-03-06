@@ -6,9 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import "./OrderScreen.css";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { detailsOrder, payOrder } from "../actions/orderActions";
+import {
+  detailsOrder,
+  orderDelivered,
+  payOrder,
+} from "../actions/orderActions";
 import Axios from "axios";
-import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import {
+  ORDER_DELIVERED_RESET,
+  ORDER_PAY_RESET,
+} from "../constants/orderConstants";
+import { Button } from "../../../node_modules/@material-ui/core/index";
 
 function OrderScreen(props) {
   const orderId = props.match.params.id;
@@ -22,6 +30,16 @@ function OrderScreen(props) {
     error: errorPay,
     success: successPay,
   } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const {
+    loading: loadingDeliver,
+    error: errorDeliver,
+    success: successDeliver,
+  } = orderDeliver;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,9 +55,16 @@ function OrderScreen(props) {
       document.body.appendChild(script);
     };
     //if order._id does not exist means the order is not loaded otherwise if order is paid is false
-    //check to see if the papyal window is already loaded. If payapl window is not loaded then call addPaypalScript function otherwise set sdkReady to true
-    if (!order || successPay || (order && order._id !== orderId)) {
-      dispatch({ type: ORDER_PAY_RESET })
+    //check to see if the papyal window is already loaded. If payapl window is not loaded then
+    //call addPaypalScript function otherwise set sdkReady to true
+    if (
+      !order ||
+      successPay ||
+      successDeliver ||
+      (order && order._id !== orderId)
+    ) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVERED_RESET });
       dispatch(detailsOrder(orderId));
     } else {
       if (!order.isPaid) {
@@ -50,10 +75,14 @@ function OrderScreen(props) {
         }
       }
     }
-  }, [dispatch, order, orderId, sdkReady, successPay]);
+  }, [dispatch, order, orderId, sdkReady, successPay, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
+  };
+
+  const deliverHandler = () => {
+    dispatch(orderDelivered(order._id));
   };
 
   return loading ? (
@@ -71,10 +100,10 @@ function OrderScreen(props) {
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:</strong> {order.ShippingAddress.fullName} <br />
-                  <strong>Address:</strong> {order.ShippingAddress.address},{' '}
-                  {order.ShippingAddress.city},{' '}
-                  {order.ShippingAddress.postalCode},{' '}
-                  {order.ShippingAddress.country}{' '}
+                  <strong>Address:</strong> {order.ShippingAddress.address},{" "}
+                  {order.ShippingAddress.city},{" "}
+                  {order.ShippingAddress.postalCode},{" "}
+                  {order.ShippingAddress.country}{" "}
                 </p>
                 {order.isDelivered ? (
                   <MessageBox variant="success">
@@ -162,10 +191,10 @@ function OrderScreen(props) {
 
               <li>
                 <div className="row">
-                  <div className='total'>
+                  <div className="total">
                     <strong>Payment Total</strong>
                   </div>
-                  <div className='total'>
+                  <div className="total">
                     <strong>${order.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
@@ -192,6 +221,19 @@ function OrderScreen(props) {
                   )}
                 </li>
               )}
+              {/* if userInfo.isAdmin and order is paid and is not delivered render jsx */}
+              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <li>
+                  {loadingDeliver && <LoadingBox></LoadingBox>}
+                  {errorDeliver && (
+                    <MessageBox variant="danger">{errorDeliver}</MessageBox>
+                  )}
+                  <Button type="button" className='primary block' onClick={deliverHandler}>
+                    Deliver Order
+                  </Button>
+                </li>
+              )}
+              {}
             </ul>
           </div>
         </div>

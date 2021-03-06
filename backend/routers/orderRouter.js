@@ -1,9 +1,14 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
+import Moment from 'moment';
+
 import Order from "../models/orderModel.js";
 import { isAdmin, isAuth } from "../utils.js";
 
 const orderRouter = express.Router();
+const yourDate =  new Date();
+const today = Date(yourDate).toLocaleString();
+
 
 orderRouter.get(
   "/mine",
@@ -59,7 +64,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isPaid = true;
-      order.paidAt = Date.now();
+      order.paidAt = today;
       order.paymentResult = {
         id: req.body.id,
         status: req.body.status,
@@ -96,6 +101,23 @@ orderRouter.delete(
     if (order) {
       const deletedOrder = await order.remove();
       res.send({ message: "Order Deleted", order: deletedOrder });
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
+  })
+);
+
+orderRouter.put(
+  "/:id/deliver",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date();
+      const updatedOrder = await order.save();
+      res.send({ message: "Order Delivered", order: updatedOrder });
     } else {
       res.status(404).send({ message: "Order Not Found" });
     }
