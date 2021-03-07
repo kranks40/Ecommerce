@@ -1,6 +1,5 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
-import moment from "moment";
 
 import Order from "../models/orderModel.js";
 import { isAdmin, isAuth } from "../utils.js";
@@ -61,7 +60,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isPaid = true;
-      order.paidAt = moment().format("ddd, MMMM DO YYYY");
+      order.paidAt = Date.now();
       order.paymentResult = {
         id: req.body.id,
         status: req.body.status,
@@ -112,7 +111,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isDelivered = true;
-      order.deliveredAt = moment().format("ddd, MMMM DO YYYY");;
+      order.deliveredAt = Date.now();
       const updatedOrder = await order.save();
       res.send({ message: "Order Delivered", order: updatedOrder });
     } else {
