@@ -1,0 +1,35 @@
+.edit__form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.edit__form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.edit__form label {
+    margin: 10px 0;
+    display: block;
+}
+
+.seller {
+    display: flex;
+    position: relative;
+}
+
+.seller input {
+    flex-direction: column;
+}
+
+.edit__button button {
+    border-radius: 5px;
+    height: 50px;
+    text-transform: inherit;
+    border: 1px solid;
+}
+
+.edit__button button:hover {
+    background-color: #F2C85F;
+}

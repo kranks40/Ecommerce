@@ -21,6 +21,7 @@ import AdminRoute from "./components/AdminRoute";
 import ProductEditScreen from "./screen/ProductEditScreen";
 import OrderListScreen from "./screen/OrderListScreen";
 import UserListScreen from "./screen/UserListScreen";
+import UserEditScreen from "./screen/UserEditScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -82,19 +83,19 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to='/dashbord'>Dashboard</Link>
+                    <Link to="/dashbord">Dashboard</Link>
                   </li>
 
                   <li>
-                    <Link to='/productlist'>Products</Link>
+                    <Link to="/productlist">Products</Link>
                   </li>
 
                   <li>
-                    <Link to='/orderlist'>Orders</Link>
+                    <Link to="/orderlist">Orders</Link>
                   </li>
 
                   <li>
-                    <Link to='/userlist'>Users</Link>
+                    <Link to="/userlist">Users</Link>
                   </li>
                 </ul>
               </div>
@@ -116,6 +117,7 @@ function App() {
           <AdminRoute path="/productlist" component={ProductListScreen} />
           <AdminRoute path="/orderlist" component={OrderListScreen} />
           <AdminRoute path="/userlist" component={UserListScreen} />
+          <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">@2021 All right reserved</footer>
