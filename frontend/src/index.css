@@ -29,7 +29,10 @@ body {
 
 header {
   grid-area: header;
-  background-color: #203040;
+  /* background-color: #203040; */
+  /* background-color: #232F3E; */
+  background-color: #00395F;
+
 }
 
 /* Common */

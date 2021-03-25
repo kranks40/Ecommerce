@@ -22,6 +22,7 @@ import ProductEditScreen from "./screen/ProductEditScreen";
 import OrderListScreen from "./screen/OrderListScreen";
 import UserListScreen from "./screen/UserListScreen";
 import UserEditScreen from "./screen/UserEditScreen";
+import SellerRoute from "./components/SellerRoute";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -75,6 +76,24 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
+            {/* If userInfo exist and if userInfo.isSeller is true then render seller menu */}
+            {userInfo &&
+              userInfo.isSeller && (
+                <div className="dropdown">
+                  <Link to="#admin">
+                    Seller <i className="fa fa-caret-down"></i>
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/productlist/seller">Products</Link>
+                    </li>
+
+                    <li>
+                      <Link to="/orderlist/seller">Orders</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin */}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
@@ -114,10 +133,15 @@ function App() {
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
           <PrivateRoute path="/userprofile" component={ProfileScreen} />
-          <AdminRoute path="/productlist" component={ProductListScreen} />
-          <AdminRoute path="/orderlist" component={OrderListScreen} />
+          <AdminRoute path="/productlist" component={ProductListScreen} exact />
+          <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
+          <SellerRoute
+            path="/productlist/seller"
+            component={ProductListScreen}
+          />
+          <SellerRoute path="/orderlist/seller" component={OrderListScreen} />
           <Route path="/" component={HomeScreen} exact />
         </main>
         <footer className="row center">@2021 All right reserved</footer>

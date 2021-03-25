@@ -2,14 +2,18 @@ import expressAsyncHandler from "express-async-handler";
 import data from "../data.js";
 import express from "express";
 import Product from "../models/productModel.js";
-import { isAuth, isAdmin } from "../utils.js";
+import { isAuth, isAdmin, isSellerOrAdmin } from "../utils.js";
 
 const productRouter = express.Router();
 
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
+    const seller = req.query.seller || "";
+    //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
+    const sellerFilter = seller ? { seller } : {};
+    const products = await Product.find({...sellerFilter});
     res.send(products);
   })
 );
@@ -38,15 +42,16 @@ productRouter.get(
 productRouter.post(
   "/",
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: "sample name" + Date.now(),
-      category: "sample category",
+      seller: req.user._id,
       image: "/images/p1.jpg",
       price: 0,
-      countInStock: 0,
+      category: "sample category",
       brand: "sample brand",
+      countInStock: 0,
       rating: 4.5,
       numReviews: 10,
       description: "sample description",
@@ -59,7 +64,7 @@ productRouter.post(
 productRouter.put(
   "/:id",
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     //get productId from req.params.id
     const productId = req.params.id;

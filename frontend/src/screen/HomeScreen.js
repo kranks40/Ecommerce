@@ -17,7 +17,8 @@ function HomeScreen() {
     /*useEffect is run atfter your components is rendered. 
     It accepts two parameters, a function and an array */
     useEffect(() => {
-           dispatch(listProducts())
+        //the empty object means that we don't want all products filtered
+           dispatch(listProducts({}))
     }, [dispatch]);
     
 

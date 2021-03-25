@@ -9,6 +9,8 @@ import { ORDER_DELETE_RESET } from "../constants/orderConstants";
 import "./OrderListScreen.css";
 
 function OrderListScreen(props) {
+  //the orderListScreen should be specified for seller by checking for a path match and if it's greater or equal to zero it would be true
+  const sellerMode = props.match.path.indexOf("/seller") >= 0;
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
 
@@ -18,12 +20,17 @@ function OrderListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = orderDelete;
+
+  const userSignin = useSelector(state => state.userSignin);
+  const {userInfo} = userSignin;
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
-    dispatch(listOrders());
-  }, [dispatch, successDelete]);
+    //sellerMode is used here by setting seller equal to sellermode and if it's true then put the curent userId otherwise put empty string
+    dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
+  }, [dispatch, sellerMode, successDelete, userInfo._id]);
 
   const deleteHandler = (order) => {
     if (window.confirm("Are you sure you want to delete order?"))

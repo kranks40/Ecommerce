@@ -7,6 +7,7 @@ export const generateToken = (user) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSeller: user.isSeller,
       //sign has three parameters, user object, json webtoken secrets,
       //jwt secrets is like a key to ecrypt your data and generate a token
       // it's a secure data so don't keep it here to be seen. you need to
@@ -50,5 +51,24 @@ export const isAdmin = (req, res, next) => {
     next();
   } else {
     res.status(401).send({ message: "Invalid Admin Token" });
+  }
+};
+
+export const isSeller = (req, res, next) => {
+  //To protect seller route in backend you add a middleware isSeller.
+  //Check if req.user and req.user.isSeller is true then pass to the next middleware otherwise render error message
+  if (req.user && req.user.isSeller) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid Seller Token" });
+  }
+};
+
+export const isSellerOrAdmin = (req, res, next) => {
+  //we creating a middleware to authenticate users that a sellers or admin
+  if (req.user && (req.user.isSeller || req.user.isAdmin)) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid Admin/Seller Token" });
   }
 };

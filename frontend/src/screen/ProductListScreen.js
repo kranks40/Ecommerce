@@ -15,6 +15,8 @@ import {
 import "./ProductListScreen.css";
 
 function ProductListScreen(props) {
+  //the productListScreen should be specified for seller by checking for a path match and if it's greater or equal to zero it would be true
+  const sellerMode = props.match.path.indexOf("/seller") >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -33,6 +35,9 @@ function ProductListScreen(props) {
     success: successDelete,
   } = productDelete;
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,12 +48,13 @@ function ProductListScreen(props) {
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
+    //sellerMode is used here by setting seller equal to sellermode and if it's true then put the curent userId otherwise put empty string
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : "" }));
+  }, [createdProduct, dispatch, props.history, sellerMode, successCreate, successDelete, userInfo._id]);
 
   const deleteHandler = (product) => {
     if (window.confirm("Are you sure you want to delete product?"))
-    dispatch(deleteProduct(product._id));
+      dispatch(deleteProduct(product._id));
   };
   const createHandler = () => {
     dispatch(createProduct());
