@@ -9,14 +9,16 @@ const productRouter = express.Router();
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
+    const name = req.query.name || "";
     //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
     const seller = req.query.seller || "";
     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
+    const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
     const sellerFilter = seller ? { seller } : {};
-    const products = await Product.find({ ...sellerFilter }).populate(
-      "seller",
-      "seller.name seller.logo"
-    );
+    const products = await Product.find({
+      ...sellerFilter,
+      ...nameFilter,
+    }).populate("seller", "seller.name seller.logo");
     res.send(products);
   })
 );

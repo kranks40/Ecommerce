@@ -24,6 +24,8 @@ import UserListScreen from "./screen/UserListScreen";
 import UserEditScreen from "./screen/UserEditScreen";
 import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screen/SellerScreen";
+import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screen/SearchScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -44,6 +46,10 @@ function App() {
             <Link className="brand" to="/">
               SureBuy
             </Link>
+          </div>
+          <div>
+            {/* pass react router dom properties to the searchbox using render fuction */}
+            <Route render={({history}) => <SearchBox history={history}></SearchBox>}></Route>
           </div>
           <div>
             <Link to="/cart">
@@ -133,6 +139,7 @@ function App() {
           <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
+          <Route path='/search/name/:name?' component={SearchScreen} exact />
           <PrivateRoute path="/userprofile" component={ProfileScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
