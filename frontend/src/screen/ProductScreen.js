@@ -64,7 +64,7 @@ function ProductScreen(props) {
               </ul>
             </div>
             <div className="col-1">
-              <div className="buy">
+              <div className="card card-body">
                 <ul>
                 <li>
                     Seller{' '}

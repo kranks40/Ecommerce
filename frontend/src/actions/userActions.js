@@ -16,6 +16,9 @@ import {
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
   USER_SIGNOUT,
+  USER_TOPSELLERS_LIST_REQUEST,
+  USER_TOPSELLERS_LIST_SUCCESS,
+  USER_TOPSELLERS_LIST_FAIL,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
@@ -71,7 +74,7 @@ export const signout = () => (dispatch) => {
   localStorage.removeItem("cartItems");
   localStorage.removeItem("ShippingAddress");
   dispatch({ type: USER_SIGNOUT });
-  document.location.href = '/signin';
+  document.location.href = "/signin";
 };
 
 export const detailsUser = (userId) => async (dispatch, getState) => {
@@ -177,6 +180,23 @@ export const updateUser = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_FAIL,
       //check if response and message exist then return a message otherwise
       //return general message
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listTopSellers = () => async (dispatch) => {
+  dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
+  try {
+    const { data } = await Axios.get('/api/users/top-sellers');
+    dispatch({ type: USER_TOPSELLERS_LIST_SUCCESS, payload: data });
+    
+  } catch (error) {
+    dispatch({
+      type: USER_TOPSELLERS_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

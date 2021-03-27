@@ -17,6 +17,7 @@ import {
   userSigninReducer,
   userUpdateReducer,
   userUpdateProfileReducer,
+  userTopSellerListsReducer,
 } from "./reducers/userReducers";
 import {
   orderListReducer,
@@ -74,6 +75,7 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  userTopSellerList: userTopSellerListsReducer,
 });
 
 /* createstore accepts reducer and initialstate */

@@ -18,3 +18,8 @@
   .card-body > * {
     margin-bottom: 5px;
   }
+
+  /* Carousel */
+.carousel .slide img {
+  max-width: 300px;
+}

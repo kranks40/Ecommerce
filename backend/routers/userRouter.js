@@ -9,9 +9,22 @@ import User from "../models/userModel.js";
 const userRouter = express.Router();
 
 userRouter.get(
+  //we need to get list of topsellers from backend so the final path is /api/users/top-sellers.
+  //a search is done on the users table for only sellers, then each is sorted by their ratings in a descending order.
+  //then limit the amount of top-sellers by 3
+  "/top-sellers",
+  expressAsyncHandler(async (req, res) => {
+    const topsellers = await User.find({ isSeller: true })
+      .sort({ "seller.rating": -1 })
+      .limit(3);
+      res.send(topsellers);
+  })
+);
+
+userRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
-     //await User.removed({});
+    //await User.removed({});
     const createdUsers = await User.insertMany(data.users);
     res.send({ createdUsers });
   })
