@@ -110,7 +110,7 @@ export const orderList = () => async (dispatch, getState) => {
   }
 };
 
-export const listOrders = ({ seller = "" }) => async (dispatch, getState) => {
+export const listOrders = ({ seller = '' }) => async (dispatch, getState) => {
   dispatch({ type: ORDER_LISTS_REQUEST });
   const {
     userSignin: { userInfo },

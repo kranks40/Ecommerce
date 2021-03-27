@@ -53,7 +53,7 @@ function ProfileScreen() {
     } else {
       dispatch(
         updateUserProfile({
-          userId: user.Id,
+          userId: user._id,
           name,
           email,
           password,
@@ -132,10 +132,11 @@ function ProfileScreen() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
+
             {/* if isSeller then render seller form */}
             {user.isSeller && (
               <>
-                <h1>Seller</h1>
+                <h2>Seller</h2>
                 <div>
                   <label htmlFor="sellerName">Seller Name</label>
                   <input

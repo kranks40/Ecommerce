@@ -7,6 +7,26 @@ import { isAdmin, isAuth, isSellerOrAdmin } from "../utils.js";
 const orderRouter = express.Router();
 
 orderRouter.get(
+  "/",
+  isAuth,
+  isSellerOrAdmin,
+  expressAsyncHandler(async (req, res) => {
+    //we need to filter orders only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
+    const seller = req.query.seller || "";
+    //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
+    const sellerFilter = seller ? { seller } : {};
+    // in the order model in backend there is a user field with an objectId
+    //that reference User. So by using populate it gets the id of user and
+    //loads the user information from user collection or table and only puts the name from that table or collection
+    const orders = await Order.find({ ...sellerFilter }).populate(
+      "user",
+      "name"
+    );
+    res.send(orders);
+  })
+);
+
+orderRouter.get(
   "/mine",
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -73,23 +93,6 @@ orderRouter.put(
     } else {
       res.status(404).send({ message: "Order Not Found" });
     }
-  })
-);
-
-orderRouter.get(
-  "/",
-  isAuth,
-  isSellerOrAdmin,
-  expressAsyncHandler(async (req, res) => {
-     //we need to filter orders only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
-     const seller = req.query.seller || "";
-     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
-     const sellerFilter = seller ? { seller } : {};
-    // in the order model in backend there is a user field with an objectId
-    //that reference User. So by using populate it gets the id of user and
-    //loads the user information from user collection or table and only puts the name from that table or collection
-    const orders = await Order.find({...sellerFilter}).populate("user", "name");
-    res.send(orders);
   })
 );
 

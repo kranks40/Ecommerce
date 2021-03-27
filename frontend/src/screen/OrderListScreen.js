@@ -29,7 +29,7 @@ function OrderListScreen(props) {
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
     //sellerMode is used here by setting seller equal to sellermode and if it's true then put the curent userId otherwise put empty string
-    dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
+    dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
   }, [dispatch, sellerMode, successDelete, userInfo._id]);
 
   const deleteHandler = (order) => {

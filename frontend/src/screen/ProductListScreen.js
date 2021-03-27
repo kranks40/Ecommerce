@@ -49,8 +49,16 @@ function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     //sellerMode is used here by setting seller equal to sellermode and if it's true then put the curent userId otherwise put empty string
-    dispatch(listProducts({ seller: sellerMode ? userInfo._id : "" }));
-  }, [createdProduct, dispatch, props.history, sellerMode, successCreate, successDelete, userInfo._id]);
+    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+  }, [
+    createdProduct,
+    dispatch,
+    props.history,
+    sellerMode,
+    successCreate,
+    successDelete,
+    userInfo._id,
+  ]);
 
   const deleteHandler = (product) => {
     if (window.confirm("Are you sure you want to delete product?"))

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { detailsProduct } from "../actions/productAction";
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
@@ -35,7 +35,7 @@ function ProductScreen(props) {
       ) : (
         <div>
           <Link to="/">
-            <KeyboardBackspaceIcon style={{fontSize: '30px' }} />
+            <KeyboardBackspaceIcon style={{ fontSize: "30px" }} />
           </Link>
           <div className="row top">
             <div className="col-2">
@@ -66,6 +66,18 @@ function ProductScreen(props) {
             <div className="col-1">
               <div className="buy">
                 <ul>
+                <li>
+                    Seller{' '}
+                    <h2>
+                      <Link to={`/seller/${product.seller._id}`}>
+                        {product.seller.seller.name}
+                      </Link>
+                    </h2>
+                    <Rating
+                      rating={product.seller.seller.rating}
+                      numReviews={product.seller.seller.numReviews}
+                    ></Rating>
+                  </li>
                   <li>
                     <div className="row">
                       <div>Price</div>

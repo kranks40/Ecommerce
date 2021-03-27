@@ -23,6 +23,7 @@ import OrderListScreen from "./screen/OrderListScreen";
 import UserListScreen from "./screen/UserListScreen";
 import UserEditScreen from "./screen/UserEditScreen";
 import SellerRoute from "./components/SellerRoute";
+import SellerScreen from "./screen/SellerScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -77,23 +78,22 @@ function App() {
               <Link to="/signin">Sign In</Link>
             )}
             {/* If userInfo exist and if userInfo.isSeller is true then render seller menu */}
-            {userInfo &&
-              userInfo.isSeller && (
-                <div className="dropdown">
-                  <Link to="#admin">
-                    Seller <i className="fa fa-caret-down"></i>
-                  </Link>
-                  <ul className="dropdown-content">
-                    <li>
-                      <Link to="/productlist/seller">Products</Link>
-                    </li>
+            {userInfo && userInfo.isSeller && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Seller <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/productlist/seller">Products</Link>
+                  </li>
 
-                    <li>
-                      <Link to="/orderlist/seller">Orders</Link>
-                    </li>
-                  </ul>
-                </div>
-              )}
+                  <li>
+                    <Link to="/orderlist/seller">Orders</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
             {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin */}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
@@ -122,6 +122,7 @@ function App() {
           </div>
         </header>
         <main>
+          <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} exact />
           <Route path="/product/:id/edit" component={ProductEditScreen} exact />
@@ -142,7 +143,7 @@ function App() {
             component={ProductListScreen}
           />
           <SellerRoute path="/orderlist/seller" component={OrderListScreen} />
-          <Route path="/" component={HomeScreen} exact />
+          <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">@2021 All right reserved</footer>
       </div>

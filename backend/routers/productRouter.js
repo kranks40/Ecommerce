@@ -13,7 +13,10 @@ productRouter.get(
     const seller = req.query.seller || "";
     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
     const sellerFilter = seller ? { seller } : {};
-    const products = await Product.find({...sellerFilter});
+    const products = await Product.find({ ...sellerFilter }).populate(
+      "seller",
+      "seller.name seller.logo"
+    );
     res.send(products);
   })
 );
@@ -30,7 +33,10 @@ productRouter.get(
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      "seller",
+      "seller.name seller logo seller.rating seller.numReviews"
+    );
     if (product) {
       res.send(product);
     } else {
@@ -73,11 +79,11 @@ productRouter.put(
     //if product exist then you start filling in the data in frontend
     if (product) {
       product.name = req.body.name;
-      product.category = req.body.category;
-      product.image = req.body.image;
       product.price = req.body.price;
-      product.countInStock = req.body.countInStock;
+      product.image = req.body.image;
+      product.category = req.body.category;
       product.brand = req.body.brand;
+      product.countInStock = req.body.countInStock;
       product.description = req.body.description;
 
       const updatedProduct = await product.save();
