@@ -1,5 +1,6 @@
 import {
   CART_ADD_ITEM,
+  CART_ADD_ITEM_FAIL,
   CART_EMPTY,
   CART_REMOVE_ITEM,
   CART_SAVE_PAYMENT_METHOD,
@@ -24,6 +25,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           //if they are equal x.product is not returned instead item is returned because,
           //it is the new value in the state.
           //if they are not equal then return x.product
+          error: '',
           cartItems: state.cartItems.map((x) =>
             x.product === existItem.product ? item : x
           ),
@@ -33,7 +35,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         //(...state.cartItems, item) simply adds what was existing
         //to what is new. meaning if 2 items existed and one more
         //is added then the cart would show 3 items in cart
-        return { ...state, cartItems: [...state.cartItems, item] };
+        return { ...state, error: '', cartItems: [...state.cartItems, item] };
       }
     case CART_REMOVE_ITEM:
       // cart properties are not changed by adding ...state from cartItems
@@ -42,6 +44,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       //and item should be added to cartItem
       return {
         ...state,
+        error: '',
         cartItems: state.cartItems.filter((x) => x.product !== action.payload),
       };
 
@@ -52,9 +55,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_SAVE_PAYMENT_METHOD:
       return { ...state, paymentMethod: action.payload };
 
+    case CART_ADD_ITEM_FAIL:
+      return { ...state, error: action.payload };
+
     case CART_EMPTY:
       //return previous state but cartItems should be empty array
-      return { ...state, cartItems: [] };
+      return { ...state, error: '', cartItems: [] };
     default:
       return state;
   }
