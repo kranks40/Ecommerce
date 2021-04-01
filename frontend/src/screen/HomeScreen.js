@@ -34,25 +34,32 @@ function HomeScreen() {
   return (
     <div>
       <h2>Top Sellers</h2>
-
       {loadingTopSeller ? (
         <LoadingBox></LoadingBox>
       ) : errorTopSeller ? (
         <MessageBox variant="danger">{errorTopSeller}</MessageBox>
       ) : (
-        <>{sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
-        <Carousel showArrows autoplay showThumbs={false}>
-        {sellers.map((seller) => (
-            <div key={seller._id}>
+        <>
+          {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
+          <Carousel
+            autoPlay={true}
+            autoPlayInterval="3000"
+            autoPlayDirection="ltr"
+            fadeOutAnimation={true}
+            mouseTrackingEnabled={true}
+            disableAutoPlayOnAction={true}
+            infiniteLoop={true}
+          >
+            {sellers.map((seller) => (
+              <div key={seller._id}>
                 <Link to={`/seller/${seller._id}`}>
-                    <img src={seller.seller.logo} alt={seller.seller.name} />
-                    <p className="legend">{seller.seller.name}</p>
+                  <img src={seller.seller.logo} alt={seller.seller.name} />
+                  <p className="legend">{seller.seller.name}</p>
                 </Link>
-            </div>
-        ))}
-        </Carousel>
+              </div>
+            ))}
+          </Carousel>
         </>
-
       )}
       <h2>Featured Products</h2>
 
@@ -64,11 +71,9 @@ function HomeScreen() {
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-
           <div className="row center">
-            {/* products here is being used from the backend */}
             {products.map((product) => (
-              <Product key={product._id} product={product} />
+              <Product key={product._id} product={product}></Product>
             ))}
           </div>
         </>

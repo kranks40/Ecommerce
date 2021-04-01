@@ -10,14 +10,13 @@ import {
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
   const { data } = await Axios.get(`/api/products/${productId}`);
-  /*Dispatch here would add products to the redux store*/
   const {
-    cart: { cartitems },
+    cart: { cartItems },
   } = getState();
-  if (cartitems.length > 0 && data.seller._id !== cartitems[0].seller._id) {
+  if (cartItems.length > 0 && data.seller._id !== cartItems[0].seller._id) {
     dispatch({
       type: CART_ADD_ITEM_FAIL,
-      payload: `Can't add to cart. Buy from only ${cartitems[0].seller.seller.name} in this order `,
+      payload: `Can't Add To Cart. Buy only from ${cartItems[0].seller.seller.name} in this order`,
     });
   } else {
     dispatch({

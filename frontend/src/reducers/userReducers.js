@@ -75,7 +75,7 @@ export const userDetailsReducer = (state = { loading: true }, action) => {
       return { loading: false, error: action.payload };
 
     case USER_DETAILS_RESET:
-      return {loading: true};
+      return { loading: true };
 
     default:
       return state;
@@ -155,7 +155,10 @@ export const userUpdateReducer = (state = {}, action) => {
   }
 };
 
-export const userTopSellerListsReducer = (state = { loading: true }, action) => {
+export const userTopSellerListsReducer = (
+  state = { loading: true },
+  action
+) => {
   switch (action.type) {
     case USER_TOPSELLERS_LIST_REQUEST:
       return { loading: true };

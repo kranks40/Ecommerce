@@ -64,15 +64,16 @@ function ProductScreen(props) {
               </ul>
             </div>
             <div className="col-1">
-              <div className="card card-body">
+              <div className="buy">
                 <ul>
-                <li>
-                    Seller{' '}
+                  <li>
+                    <h2>Seller: {''}</h2>
                     <h2>
                       <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}
                       </Link>
                     </h2>
+                    
                     <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}

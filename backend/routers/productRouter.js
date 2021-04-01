@@ -37,7 +37,7 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id).populate(
       "seller",
-      "seller.name seller logo seller.rating seller.numReviews"
+      "seller.name seller.logo seller.rating seller.numReviews"
     );
     if (product) {
       res.send(product);
@@ -53,7 +53,7 @@ productRouter.post(
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: "sample name" + Date.now(),
+      name: "sample name" + Date.now().toLocaleString(),
       seller: req.user._id,
       image: "/images/p1.jpg",
       price: 0,

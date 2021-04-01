@@ -8,7 +8,7 @@ export const generateToken = (user) => {
       email: user.email,
       isAdmin: user.isAdmin,
       isSeller: user.isSeller,
-      //sign has three parameters, user object, json webtoken secrets,
+      //signin has three parameters, user object, json webtoken secrets,
       //jwt secrets is like a key to ecrypt your data and generate a token
       // it's a secure data so don't keep it here to be seen. you need to
       //put it in a .env file and .env package

@@ -56,7 +56,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       return { ...state, paymentMethod: action.payload };
 
     case CART_ADD_ITEM_FAIL:
-      return { ...state, error: action.payload };
+     return { ...state, error: action.payload };
 
     case CART_EMPTY:
       //return previous state but cartItems should be empty array

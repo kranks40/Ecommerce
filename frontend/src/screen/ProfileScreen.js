@@ -44,7 +44,7 @@ function ProfileScreen() {
         setSellerDescription(user.seller.description);
       }
     }
-  }, [dispatch, userInfo._id, user]);
+  }, [dispatch, user, userInfo._id]);
 
   const submitHandler = (e) => {
     e.preventDefault();

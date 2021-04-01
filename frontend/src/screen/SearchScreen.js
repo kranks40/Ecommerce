@@ -27,7 +27,7 @@ function SearchScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.lenght} Results</div>
+          <div>{products.length} Results</div>
         )}
       </div>
       <div className="row top">

@@ -49,8 +49,13 @@ function App() {
           </div>
           <div>
             {/* pass react router dom properties to the searchbox using render fuction */}
-            <Route render={({history}) => <SearchBox history={history}></SearchBox>}></Route>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
           </div>
+
           <div>
             <Link to="/cart">
               <ShoppingCartSharpIcon />
@@ -68,7 +73,7 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/userprofile">User Profile</Link>
+                    <Link to="/profile">User Profile</Link>
                   </li>
                   <li>
                     <Link to="/orderhistory">Order History</Link>
@@ -134,13 +139,13 @@ function App() {
           <Route path="/product/:id/edit" component={ProductEditScreen} exact />
           <Route path="/signin" component={SigninScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <PrivateRoute path="/shipping" component={ShippingAddressScreen} />
-          <PrivateRoute path="/payment" component={PaymentScreen} />
+          <Route path="/shipping" component={ShippingAddressScreen} />
+          <Route path="/payment" component={PaymentScreen} />
           <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
-          <Route path='/search/name/:name?' component={SearchScreen} exact />
-          <PrivateRoute path="/userprofile" component={ProfileScreen} />
+          <PrivateRoute path="/search/name/:name?" component={SearchScreen} exact />
+          <PrivateRoute path="/profile" component={ProfileScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
