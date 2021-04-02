@@ -67,7 +67,7 @@ function ProductScreen(props) {
               <div className="buy">
                 <ul>
                   <li>
-                    <h2>Seller: {''}</h2>
+                    <h2>Seller: {' '}</h2>
                     <h2>
                       <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}
