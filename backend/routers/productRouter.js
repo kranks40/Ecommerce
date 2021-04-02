@@ -53,7 +53,7 @@ productRouter.post(
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: "sample name" + Date.now().toLocaleString(),
+      name: 'sample name',
       seller: req.user._id,
       image: "/images/p1.jpg",
       price: 0,

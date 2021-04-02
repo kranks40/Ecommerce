@@ -2,14 +2,14 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 
 import Order from "../models/orderModel.js";
-import { isAdmin, isAuth, isSeller } from "../utils.js";
+import { isAdmin, isAuth, isSellerOrAdmin } from "../utils.js";
 
 const orderRouter = express.Router();
 
 orderRouter.get(
   "/",
   isAuth,
-  isSeller,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     //we need to filter orders only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
     const seller = req.query.seller || "";
