@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import ShoppingCartSharpIcon from "@material-ui/icons/ShoppingCartSharp";
+
 
 import CartScreen from "./screen/CartScreen";
 import HomeScreen from "./screen/HomeScreen";
@@ -26,8 +27,13 @@ import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screen/SellerScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screen/SearchScreen";
+import { listProductCategories } from "./actions/productAction";
+import LoadingBox from "./components/LoadingBox";
+import MessageBox from "./components/MessageBox";
 
 function App() {
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
@@ -38,11 +44,29 @@ function App() {
     dispatch(signout());
   };
 
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const {
+    loading: loadingCategory,
+    error: errorCategory,
+    categories,
+  } = productCategoryList;
+
+  useEffect(() => {
+    dispatch(listProductCategories());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
+            <button
+              className="open-sidebar"
+              type="button"
+              onClick={() => setSidebarIsOpen(true)}
+            >
+              <i className="fa fa-bars"></i>
+            </button>
             <Link className="brand" to="/">
               SureBuy
             </Link>
@@ -132,6 +156,37 @@ function App() {
             )}
           </div>
         </header>
+        {/* create aside elements of html5. set className conditional. If sidebar is open then set the class to open otherwise set class to empty string*/}
+        <aside className={sidebarIsOpen ? "open" : ""}>
+          <ul className="categories">
+            <li>
+              <strong>Categories</strong>
+              <button
+                onClick={() => setSidebarIsOpen(false)}
+                className="close-sidebar"
+                type="button"
+              >
+                <i className="fa fa-close"></i>
+              </button>
+            </li>
+            {loadingCategory ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategory ? (
+              <MessageBox variant="danger">{errorCategory}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+        </aside>
         <main>
           <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
@@ -144,7 +199,21 @@ function App() {
           <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
-          <PrivateRoute path="/search/name/:name?" component={SearchScreen} exact />
+          <PrivateRoute
+            path="/search/name/:name?"
+            component={SearchScreen}
+            exact
+          />
+          <PrivateRoute
+            path="/search/category/:category"
+            component={SearchScreen}
+            exact
+          />
+          <PrivateRoute
+            path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          />
           <PrivateRoute path="/profile" component={ProfileScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />

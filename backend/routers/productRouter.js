@@ -6,20 +6,33 @@ import { isAuth, isAdmin, isSellerOrAdmin } from "../utils.js";
 
 const productRouter = express.Router();
 
+//list products
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
     const name = req.query.name || "";
+    const category = req.query.category || "";
     //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
     const seller = req.query.seller || "";
     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
     const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
     const sellerFilter = seller ? { seller } : {};
+    const categoryFilter = category ? { category } : {};
+
     const products = await Product.find({
       ...sellerFilter,
       ...nameFilter,
+      ...categoryFilter,
     }).populate("seller", "seller.name seller.logo");
     res.send(products);
+  })
+);
+
+productRouter.get(
+  "/categories",
+  expressAsyncHandler(async (req, res) => {
+    const categories = await Product.find().distinct("category");
+    res.send(categories);
   })
 );
 
@@ -53,7 +66,7 @@ productRouter.post(
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: 'sample name',
+      name: "sample name",
       seller: req.user._id,
       image: "/images/p1.jpg",
       price: 0,
