@@ -12,18 +12,43 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     const name = req.query.name || "";
     const category = req.query.category || "";
+    //if req.query.min exist and number of req.query.min is not equal to zero then use number of req.query.min otherwise make it zero
+    const min =
+      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+    const max =
+      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+    const rating =
+      req.query.rating && Number(req.query.rating) !== 0
+        ? Number(req.query.rating)
+        : 0;
     //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
     const seller = req.query.seller || "";
+    const order = req.query.order || "";
     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
     const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
     const sellerFilter = seller ? { seller } : {};
+    const sortOrder =
+      order === "lowest"
+        ? { price: 1 }
+        : order === "highest"
+        ? { price: -1 }
+        : order === "toprated"
+        ? { rating: -1 }
+        : { _id: -1 };
     const categoryFilter = category ? { category } : {};
+    //define priceFilter by writing, if min and max exist or they are not zero use this filter
+    const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
 
     const products = await Product.find({
       ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
-    }).populate("seller", "seller.name seller.logo");
+      ...priceFilter,
+      ...ratingFilter,
+    })
+      .populate("seller", "seller.name seller.logo")
+      .sort(sortOrder);
     res.send(products);
   })
 );

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import ShoppingCartSharpIcon from "@material-ui/icons/ShoppingCartSharp";
-
 
 import CartScreen from "./screen/CartScreen";
 import HomeScreen from "./screen/HomeScreen";
@@ -211,6 +210,11 @@ function App() {
           />
           <PrivateRoute
             path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          />
+          <PrivateRoute
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
             component={SearchScreen}
             exact
           />

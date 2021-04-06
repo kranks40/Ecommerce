@@ -14,3 +14,7 @@
   .search input:focus {
     outline-width: 0;
   }
+
+  .active {
+    font-weight: bold;
+  }
