@@ -20,6 +20,10 @@ const {
   PRODUCT_CATEGORY_LIST_REQUEST,
   PRODUCT_CATEGORY_LIST_SUCCESS,
   PRODUCT_CATEGORY_LIST_FAIL,
+  PRODUCT_COMMENT_REQUEST,
+  PRODUCT_COMMENT_SUCCESS,
+  PRODUCT_COMMENT_FAIL,
+  PRODUCT_COMMENT_RESET,
 } = require("../constants/productConstants");
 
 export const productListReducer = (
@@ -127,6 +131,25 @@ export const productCategoryListReducer = (
 
     case PRODUCT_CATEGORY_LIST_FAIL:
       return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const productCommentReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_COMMENT_REQUEST:
+      return { loading: true };
+
+    case PRODUCT_COMMENT_SUCCESS:
+      return { loading: false, success: true, review: action.payload };
+
+    case PRODUCT_COMMENT_FAIL:
+      return { loading: false, error: action.payload };
+
+    case PRODUCT_COMMENT_RESET:
+      return {};
 
     default:
       return state;

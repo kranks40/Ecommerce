@@ -1,75 +1,90 @@
 .col-1 {
-    flex: 1 1 250px;
+  flex: 1 1 250px;
 }
 
 .col-2 {
-    flex: 2 1 500px;
+  flex: 2 1 500px;
 }
 
 ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 li {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .success {
-    color: #00C853 ;
+  color: #00c853;
 }
 
 .danger {
-    color: #e71d36 ;
+  color: #e71d36;
 }
 
-input, 
-select, 
+input,
+select,
 textarea,
 button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px #a4a4a4 solid;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px #a4a4a4 solid;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 select::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 select {
-    overflow: scroll;
+  overflow: scroll;
 }
 
 button {
-    background-color: #f8f8f8;
-    cursor: pointer;
+  background-color: #f8f8f8;
+  cursor: pointer;
 }
 
 button.primary {
-    background-color: #f0c040;
+  background-color: #f0c040;
 }
 
 button.block {
-    width: 100%;
+  width: 100%;
 }
 
-input:hover, 
-select:hover, 
+input:hover,
+select:hover,
 textarea:hover,
 button:hover {
-    border: 1px #404040 solid;
+  border: 1px #404040 solid;
 }
 
 .buy {
-    border: 1px #c0c0c0 solid;
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 15px;
-  }
+  border: 1px #c0c0c0 solid;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 15px;
+}
+
+.review__form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.review__form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.review__form label {
+  margin: 10px 0;
+  display: block;
+}

@@ -8,6 +8,7 @@ import {
   productUpdateReducer,
   productDeleteReducer,
   productCategoryListReducer,
+  productCommentReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
@@ -78,6 +79,7 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   userTopSellerList: userTopSellerListsReducer,
   productCategoryList:productCategoryListReducer,
+  productComment: productCommentReducer,
 });
 
 /* createstore accepts reducer and initialstate */

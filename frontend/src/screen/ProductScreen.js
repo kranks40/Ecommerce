@@ -1,24 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { detailsProduct } from "../actions/productAction";
+import { createComment, detailsProduct } from "../actions/productAction";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import "./ProductScreen.css";
+import { PRODUCT_COMMENT_RESET } from "../constants/productConstants";
 
 function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
+
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const [qty, setQty] = useState(1);
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productComment = useSelector((state) => state.productComment);
+  const {
+    loading: loadingReview,
+    error: errorReview,
+    success: successReview,
+  } = productComment;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (comment && rating) {
+      dispatch(
+        createComment(productId, { rating, comment, name: userInfo.name })
+      );
+    } else {
+      alert("Please enter comment and rating");
+    }
+  };
+
   useEffect(() => {
+    if (successReview) {
+      window.alert("Review Submitted Successfully");
+      setRating("");
+      setComment("");
+      dispatch({ type: PRODUCT_COMMENT_RESET });
+    }
     dispatch(detailsProduct(productId));
-  }, [dispatch, productId]);
+  }, [dispatch, productId, successReview]);
 
   const addToCartHandler = () => {
     props.history.push(`/cart/${productId}?qty=${qty}`);
@@ -35,7 +67,7 @@ function ProductScreen(props) {
       ) : (
         <div>
           <Link to="/">
-            <KeyboardBackspaceIcon style={{ fontSize: "30px" }} />
+            <KeyboardBackspaceIcon style={{ fontSize: "50px" }} />
           </Link>
           <div className="row top">
             <div className="col-2">
@@ -67,13 +99,19 @@ function ProductScreen(props) {
               <div className="buy">
                 <ul>
                   <li>
-                    <h2>Seller: {' '}</h2>
-                    <h2>
-                      <Link to={`/seller/${product.seller._id}`}>
-                        {product.seller.seller.name}
-                      </Link>
-                    </h2>
-                    
+                    <div className="row">
+                      <div>
+                        <strong>Seller</strong>
+                      </div>
+                      <div>
+                        <h2>
+                          <Link to={`/seller/${product.seller._id}`}>
+                            {product.seller.seller.name}
+                          </Link>
+                        </h2>
+                      </div>
+                    </div>
+
                     <Rating
                       rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews}
@@ -81,13 +119,17 @@ function ProductScreen(props) {
                   </li>
                   <li>
                     <div className="row">
-                      <div>Price</div>
+                      <div>
+                        <strong>Price</strong>
+                      </div>
                       <div className="price">${product.price}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row">
-                      <div>Status</div>
+                      <div>
+                        <strong>Status</strong>
+                      </div>
                       <div>
                         {product.countInStock > 0 ? (
                           <span className="success">In Stock</span>
@@ -101,7 +143,9 @@ function ProductScreen(props) {
                     <>
                       <li>
                         <div className="row">
-                          <div>Qty</div>
+                          <div>
+                            <strong>Qty</strong>
+                          </div>
                           <div>
                             <select
                               value={qty}
@@ -131,6 +175,76 @@ function ProductScreen(props) {
                 </ul>
               </div>
             </div>
+          </div>
+
+          <div>
+            <h2 id="reviews">Reviews</h2>
+            {/* if product.review.length is equal to zero then render jsx */}
+            {product.reviews.length === 0 && (
+              <MessageBox>There is no review</MessageBox>
+            )}
+            <ul>
+              {/* product.reviews.map is used to convert each review object to jsx object */}
+              {product.reviews.map((review) => (
+                <li key={review._id}>
+                  <strong>{review.name}</strong>
+                  <Rating rating={review.rating} caption=""></Rating>
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                </li>
+              ))}
+              <li>
+                {userInfo ? (
+                  <form className="review__form" onSubmit={submitHandler}>
+                    <div>
+                      <h2>Write a customer review</h2>
+                    </div>
+                    <div>
+                      <label htmlFor="rating"></label>
+                      <select
+                        id="rating"
+                        value={rating}
+                        onChange={(e) => setRating(e.target.value)}
+                      >
+                        <option value="">Select...</option>
+                        <option value="1">Poor</option>
+                        <option value="2">Fair</option>
+                        <option value="3">Good</option>
+                        <option value="4">Very good</option>
+                        <option value="5">Excellent</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="comment">Comment</label>
+                      <textarea
+                        id="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      ></textarea>
+                    </div>
+                    <div>
+                      <label>
+                        <button className="primary block" type="submit">
+                          Submit
+                        </button>
+                      </label>
+                      <div>
+                        {loadingReview && <LoadingBox></LoadingBox>}
+                        {errorReview && (
+                          <MessageBox variant="danger">
+                            {errorReview}
+                          </MessageBox>
+                        )}
+                      </div>
+                    </div>
+                  </form>
+                ) : (
+                  <MessageBox>
+                    Please <Link to="/signin">Sign in</Link> to write a review
+                  </MessageBox>
+                )}
+              </li>
+            </ul>
           </div>
         </div>
       )}

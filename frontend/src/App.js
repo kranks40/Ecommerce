@@ -30,6 +30,7 @@ import { listProductCategories } from "./actions/productAction";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 
+
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
@@ -51,13 +52,13 @@ function App() {
   } = productCategoryList;
 
   useEffect(() => {
-    dispatch(listProductCategories());
+     dispatch(listProductCategories());
   }, [dispatch]);
 
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+       <header className="row">
           <div>
             <button
               className="open-sidebar"
@@ -71,7 +72,7 @@ function App() {
             </Link>
           </div>
           <div>
-            {/* pass react router dom properties to the searchbox using render fuction */}
+             {/* pass react router dom properties to the searchbox using render fuction  */}
             <Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
@@ -81,14 +82,14 @@ function App() {
 
           <div>
             <Link to="/cart">
-              <ShoppingCartSharpIcon />
-              {/* compare cartitem.length if it's greater than zero then render object */}
+              <ShoppingCartSharpIcon style={{ fontSize: "22px" }} />
+               {/* compare cartitem.length if it's greater than zero then render object  */}
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
-            {/* if userInfo does exist then render username with a link */}
-            {/* if userInfo does not exist then render signin link */}
+            {/* if userInfo does exist then render username with a link 
+            if userInfo does not exist then render signin link  */}
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
@@ -111,7 +112,7 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
-            {/* If userInfo exist and if userInfo.isSeller is true then render seller menu */}
+             {/* If userInfo exist and if userInfo.isSeller is true then render seller menu  */}
             {userInfo && userInfo.isSeller && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -128,7 +129,7 @@ function App() {
                 </ul>
               </div>
             )}
-            {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin */}
+             {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin  */}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -154,9 +155,9 @@ function App() {
               </div>
             )}
           </div>
-        </header>
+        </header>  
         {/* create aside elements of html5. set className conditional. If sidebar is open then set the class to open otherwise set class to empty string*/}
-        <aside className={sidebarIsOpen ? "open" : ""}>
+         <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
             <li>
               <strong>Categories</strong>
