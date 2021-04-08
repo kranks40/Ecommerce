@@ -15,8 +15,8 @@ userRouter.get(
   "/top-sellers",
   expressAsyncHandler(async (req, res) => {
     const topsellers = await User.find({ isSeller: true })
-      .sort({ "seller.rating": -1 })
-      .limit(3);
+      .sort({ "seller.rating": - 1 })
+      // .limit();
     res.send(topsellers);
   })
 );

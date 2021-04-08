@@ -43,7 +43,7 @@ function HomeScreen() {
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
           <Carousel
             autoPlay={true}
-            autoPlayInterval="3000"
+            autoPlayInterval="1000"
             autoPlayDirection="ltr"
             fadeOutAnimation={true}
             mouseTrackingEnabled={true}
