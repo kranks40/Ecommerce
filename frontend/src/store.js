@@ -20,6 +20,7 @@ import {
   userUpdateReducer,
   userUpdateProfileReducer,
   userTopSellerListsReducer,
+  userAddressMapReducer,
 } from "./reducers/userReducers";
 import {
   orderListReducer,
@@ -80,6 +81,7 @@ const reducer = combineReducers({
   userTopSellerList: userTopSellerListsReducer,
   productCategoryList:productCategoryListReducer,
   productComment: productCommentReducer,
+  userAddressMap: userAddressMapReducer,
 });
 
 /* createstore accepts reducer and initialstate */

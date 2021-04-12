@@ -9,11 +9,19 @@ import "./ShippingAddressScreen.css";
 function ShippingAddressScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   const cart = useSelector((state) => state.cart);
-  const {ShippingAddress} = cart;
+  const { ShippingAddress } = cart;
+
+  const [lat, setLat] = useState(ShippingAddress.lat);
+  const [lng, setLng] = useState(ShippingAddress.lng);
+
+  const userAddressMap = useSelector((state) => state.userAddressMap);
+  const { address: addressMap } = userAddressMap;
+
   //if userInfo does not exist then redirect user to sign in screen
-  if(!userInfo) {
-      props.history.push('/signin')
+  if (!userInfo) {
+    props.history.push("/signin");
   }
   const [fullName, setFullName] = useState(ShippingAddress.fullName);
   const [address, setAddress] = useState(ShippingAddress.address);
@@ -25,10 +33,50 @@ function ShippingAddressScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    //check the address map, if it exist then use it, otherwise use current lat and lng
+    const newLat = addressMap ? addressMap.lat : lat;
+    const newLng = addressMap ? addressMap.lng : lng;
+    //if addressmap exist set latitude and longitude based on them
+    if (addressMap) {
+      setLat(addressMap.lat);
+      setLng(addressMap.lng);
+    }
+    let moveOn = true;
+    //if newlat and newlng does not exist show user a message
+    if (!newLat || !newLng) {
+      moveOn = window.confirm(
+        "You did not set your current location on map. Continue?"
+      );
+    }
+    if (moveOn) {
+      dispatch(
+        saveShippingAddress({
+          fullName,
+          address,
+          city,
+          postalCode,
+          country,
+          lat: newLat,
+          lng: newLng,
+        })
+      );
+      props.history.push("/payment");
+    }
+  };
+
+  const chooseOnMap = () => {
     dispatch(
-      saveShippingAddress({ fullName, address, city, postalCode, country })
+      saveShippingAddress({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        lat,
+        lng,
+      })
     );
-    props.history.push("/payment");
+    props.history.push("/map");
   };
 
   return (
@@ -44,6 +92,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="fullName"
+            autoCapitalize='words'
+            autoCorrect={true}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -55,6 +105,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="address"
+            autoCapitalize={true}
+            autoCorrect={true}
             placeholder="Street address or P.O. Box"
             value={address}
             required
@@ -76,6 +128,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="city"
+            autoCapitalize={true}
+            autoCorrect={true}
             value={city}
             required
             onChange={(e) => setCity(e.target.value)}
@@ -98,10 +152,19 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="country"
+            autoCapitalize={true}
+            autoCorrect={true}
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}
           ></input>
+        </div>
+
+        <div>
+          <label htmlFor="chooseOnMap">Location</label>
+          <button type="button" onClick={chooseOnMap}>
+            Choose on Map
+          </button>
         </div>
 
         <div className="shipping__button">

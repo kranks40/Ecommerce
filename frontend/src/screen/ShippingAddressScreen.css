@@ -35,7 +35,7 @@
 
 .city {
     position: relative;
-    max-width: 100px;
+    max-width: 200px;
     margin: 10px 0;
     display: block;
 
@@ -43,7 +43,7 @@
 
 .postalcode {
     position: relative;
-    max-width: 100px;
+    max-width: 200px;
     margin: 10px 0;
     display: block;
     flex: 1;

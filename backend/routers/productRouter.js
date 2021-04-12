@@ -3,6 +3,7 @@ import data from "../data.js";
 import express from "express";
 import Product from "../models/productModel.js";
 import { isAuth, isAdmin, isSellerOrAdmin } from "../utils.js";
+import User from '../models/userModel.js';
 
 const productRouter = express.Router();
 
@@ -65,8 +66,19 @@ productRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
     //await User.removed({});
-    const createdProducts = await Product.insertMany(data.products);
-    res.send({ createdProducts });
+    const seller = await User.findOne({ isSeller: true });
+    if (seller) {
+      const products = data.products.map((product) => ({
+        ...product,
+        seller: seller._id,
+      }));
+      const createdProducts = await Product.insertMany(products);
+      res.send({ createdProducts });
+    } else {
+      res
+        .status(500)
+        .send({ message: 'No seller found. first run /api/users/seed' });
+    }
   })
 );
 
