@@ -136,6 +136,7 @@ userRouter.get(
   })
 );
 
+//api to delete user
 userRouter.delete(
   "/:id",
   isAuth,
@@ -155,6 +156,7 @@ userRouter.delete(
   })
 );
 
+//api to update user
 userRouter.put(
   "/:id",
   isAuth,

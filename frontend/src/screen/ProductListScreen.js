@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
 import { Button } from "../../../node_modules/@material-ui/core/index";
+
 import {
   createProduct,
   deleteProduct,
@@ -15,10 +17,12 @@ import {
 import "./ProductListScreen.css";
 
 function ProductListScreen(props) {
+  const { pageNumber = 1 } = useParams();
+
   //the productListScreen should be specified for seller by checking for a path match and if it's greater or equal to zero it would be true
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const productCreate = useSelector((state) => state.productCreate);
   const {
@@ -49,7 +53,9 @@ function ProductListScreen(props) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     //sellerMode is used here by setting seller equal to sellermode and if it's true then put the curent userId otherwise put empty string
-    dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+    dispatch(
+      listProducts({ seller: sellerMode ? userInfo._id : "", pageNumber })
+    );
   }, [
     createdProduct,
     dispatch,
@@ -58,6 +64,7 @@ function ProductListScreen(props) {
     successCreate,
     successDelete,
     userInfo._id,
+    pageNumber,
   ]);
 
   const deleteHandler = (product) => {
@@ -89,48 +96,63 @@ function ProductListScreen(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-                <td className="row__button">
-                  <Button
-                    type="button"
-                    className="small-edit"
-                    onClick={() =>
-                      props.history.push(`/product/${product._id}/edit`)
-                    }
-                  >
-                    Edit
-                  </Button>
-
-                  <Button
-                    type="button"
-                    className="small-delete"
-                    onClick={() => deleteHandler(product)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th>ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td className="row__button">
+                    <Button
+                      type="button"
+                      className="small-edit"
+                      onClick={() =>
+                        props.history.push(`/product/${product._id}/edit`)
+                      }
+                    >
+                      Edit
+                    </Button>
+
+                    <Button
+                      type="button"
+                      className="small-delete"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+           <div className="row center pagination">
+             {/* converting pages to link */}
+           {[...Array(pages).keys()].map((x) => (
+              <Link
+                 className={x + 1 === page ? "active" : ""}
+                 key={x + 1}
+                 to={`/productlist/pageNumber/${x + 1}`}
+               >
+                 {x + 1}
+               </Link>
+             ))}
+           </div>
+        </>
       )}
     </div>
   );

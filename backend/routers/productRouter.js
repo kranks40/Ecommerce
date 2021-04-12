@@ -3,7 +3,7 @@ import data from "../data.js";
 import express from "express";
 import Product from "../models/productModel.js";
 import { isAuth, isAdmin, isSellerOrAdmin } from "../utils.js";
-import User from '../models/userModel.js';
+import User from "../models/userModel.js";
 
 const productRouter = express.Router();
 
@@ -11,8 +11,15 @@ const productRouter = express.Router();
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
+    const pageSize = 3;
+    //get pagenumber from query string or this api. if pagenumber does not exist use 1 as a default pagenumber
+    const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || "";
     const category = req.query.category || "";
+    //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
+    const seller = req.query.seller || "";
+    const order = req.query.order || "";
+
     //if req.query.min exist and number of req.query.min is not equal to zero then use number of req.query.min otherwise make it zero
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -22,12 +29,16 @@ productRouter.get(
       req.query.rating && Number(req.query.rating) !== 0
         ? Number(req.query.rating)
         : 0;
-    //we need to filter produts only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
-    const seller = req.query.seller || "";
-    const order = req.query.order || "";
-    //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
+
     const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
+
+    //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
     const sellerFilter = seller ? { seller } : {};
+    const categoryFilter = category ? { category } : {};
+
+    //define priceFilter by writing, if min and max exist or they are not zero use this filter
+    const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
     const sortOrder =
       order === "lowest"
         ? { price: 1 }
@@ -36,10 +47,14 @@ productRouter.get(
         : order === "toprated"
         ? { rating: -1 }
         : { _id: -1 };
-    const categoryFilter = category ? { category } : {};
-    //define priceFilter by writing, if min and max exist or they are not zero use this filter
-    const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+
+    const count = await Product.count({
+      ...sellerFilter,
+      ...nameFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    });
 
     const products = await Product.find({
       ...sellerFilter,
@@ -49,8 +64,11 @@ productRouter.get(
       ...ratingFilter,
     })
       .populate("seller", "seller.name seller.logo")
-      .sort(sortOrder);
-    res.send(products);
+      .sort(sortOrder)
+      //we skip the unwanted records and find the exact record in the list that we want. by having limit function we only get the limited amount of page set by pagesize above
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );
 
@@ -65,7 +83,7 @@ productRouter.get(
 productRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
-    //await User.removed({});
+    // await User.removed({});
     const seller = await User.findOne({ isSeller: true });
     if (seller) {
       const products = data.products.map((product) => ({
@@ -77,7 +95,7 @@ productRouter.get(
     } else {
       res
         .status(500)
-        .send({ message: 'No seller found. first run /api/users/seed' });
+        .send({ message: "No seller found. first run /api/users/seed" });
     }
   })
 );

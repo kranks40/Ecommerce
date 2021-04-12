@@ -188,7 +188,7 @@ function App() {
           </ul>
         </aside>
         <main>
-          <Route path="/" component={HomeScreen} exact></Route>
+         
           <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} exact />
@@ -217,12 +217,13 @@ function App() {
             exact
           />
           <PrivateRoute
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact
           />
           <PrivateRoute path="/profile" component={ProfileScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
+          <AdminRoute path="/productlist/pageNumber/:pageNumber" component={ProductListScreen} exact />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
@@ -231,6 +232,7 @@ function App() {
             component={ProductListScreen}
           />
           <SellerRoute path="/orderlist/seller" component={OrderListScreen} />
+          <Route path="/" component={HomeScreen} exact></Route>
         </main>
         <footer className="row center">@2021 All right reserved</footer>
       </div>
