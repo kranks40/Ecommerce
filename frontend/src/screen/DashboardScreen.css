@@ -1,0 +1,29 @@
+.summary > li {
+    border: 1px #c0c0c0 solid;
+    margin: 20px;
+    border-radius: 5px;
+    flex: 1 1 200px;
+}
+
+.summary-title {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.summary-body {
+    font-size: 40px;
+    padding: 10px;
+    text-align: center;
+}
+
+.summary-title.color1 {
+    background-color: #f0e0e0;
+}
+
+.summary-title.color2 {
+    background-color: #e0f0e0;
+}
+
+.summary-title.color3 {
+    background-color: #e0e0f0;
+}

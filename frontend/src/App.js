@@ -30,6 +30,7 @@ import { listProductCategories } from "./actions/productAction";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import MapScreen from "./screen/MapScreen";
+import DashboardScreen from "./screen/DashboardScreen";
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -137,7 +138,7 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/dashbord">Dashboard</Link>
+                    <Link to="/dashboard">Dashboard</Link>
                   </li>
 
                   <li>
@@ -227,6 +228,7 @@ function App() {
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
+          <AdminRoute path='/dashboard' component={DashboardScreen} />
           <SellerRoute
             path="/productlist/seller"
             component={ProductListScreen}
