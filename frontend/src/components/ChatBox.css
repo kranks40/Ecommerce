@@ -1,0 +1,20 @@
+.chatbox {
+    color: #000000;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+.chatbox ul {
+    overflow: scroll;
+    max-height: 200px;
+}
+
+.chatbox li {
+    margin-bottom: 10px;
+}
+
+.chatbox input {
+    width: calc(100%- 90px);
+}
+

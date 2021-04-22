@@ -31,6 +31,8 @@ import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import MapScreen from "./screen/MapScreen";
 import DashboardScreen from "./screen/DashboardScreen";
+import SupportScreen from "./screen/SupportScreen";
+import ChatBox from "./components/ChatBox";
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -152,6 +154,10 @@ function App() {
                   <li>
                     <Link to="/userlist">Users</Link>
                   </li>
+
+                  <li>
+                    <Link to="/support">Support</Link>
+                  </li>
                 </ul>
               </div>
             )}
@@ -189,7 +195,6 @@ function App() {
           </ul>
         </aside>
         <main>
-         
           <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} exact />
@@ -224,11 +229,16 @@ function App() {
           />
           <PrivateRoute path="/profile" component={ProfileScreen} />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
-          <AdminRoute path="/productlist/pageNumber/:pageNumber" component={ProductListScreen} exact />
+          <AdminRoute
+            path="/productlist/pageNumber/:pageNumber"
+            component={ProductListScreen}
+            exact
+          />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
-          <AdminRoute path='/dashboard' component={DashboardScreen} />
+          <AdminRoute path="/dashboard" component={DashboardScreen} />
+          <AdminRoute path="/support" component={SupportScreen} />
           <SellerRoute
             path="/productlist/seller"
             component={ProductListScreen}
@@ -236,7 +246,10 @@ function App() {
           <SellerRoute path="/orderlist/seller" component={OrderListScreen} />
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">@2021 All right reserved</footer>
+        <footer className="row center">
+          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+          <div>@2021 All right reserved</div>{" "}
+        </footer>
       </div>
     </BrowserRouter>
   );
