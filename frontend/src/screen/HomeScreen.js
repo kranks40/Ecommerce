@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productAction";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { listTopSellers } from "../actions/userActions";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function HomeScreen() {
+  const { pageNumber = 1 } = useParams();
+
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const userTopSellerList = useSelector((state) => state.userTopSellerList);
   const {
@@ -27,9 +29,18 @@ function HomeScreen() {
     It accepts two parameters, a function and an array */
   useEffect(() => {
     //the empty object means that we don't want all products filtered
-    dispatch(listProducts({}));
+    dispatch(
+      listProducts({
+        pageNumber,
+      })
+    );
     dispatch(listTopSellers());
-  }, [dispatch]);
+  }, [dispatch, pageNumber]);
+
+  const getFilterUrl = (filter) => {
+    const filterPage = filter.page || pageNumber;
+    return `/pageNumber/${filterPage}`;
+  };
 
   return (
     <div>
@@ -74,6 +85,19 @@ function HomeScreen() {
           <div className="row center">
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
+            ))}
+          </div>
+
+          <div className="row center pagination">
+            {/* converting pages to link */}
+            {[...Array(pages).keys()].map((x) => (
+              <Link
+                className={x + 1 === page ? "active" : ""}
+                key={x + 1}
+                to={`/pageNumber/${x + 1}`}
+              >
+                {x + 1}
+              </Link>
             ))}
           </div>
         </>

@@ -195,6 +195,7 @@ function App() {
           </ul>
         </aside>
         <main>
+          <Route path="/pageNumber/:pageNumber" component={HomeScreen} />
           <Route path="/seller/:id" component={SellerScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} exact />
