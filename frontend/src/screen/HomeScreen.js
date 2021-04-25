@@ -83,7 +83,7 @@ function HomeScreen() {
             ))}
           </div>
 
-          <div className="row center pagination">
+          <div className="row center pagination-home">
             {/* converting pages to link */}
             {[...Array(pages).keys()].map((x) => (
               <Link

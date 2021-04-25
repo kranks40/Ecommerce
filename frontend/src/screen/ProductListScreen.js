@@ -140,18 +140,18 @@ function ProductListScreen(props) {
             </tbody>
           </table>
 
-           <div className="row center pagination">
-             {/* converting pages to link */}
-           {[...Array(pages).keys()].map((x) => (
+          <div className="row center pagination">
+            {/* converting pages to link */}
+            {[...Array(pages).keys()].map((x) => (
               <Link
-                 className={x + 1 === page ? "active" : ""}
-                 key={x + 1}
-                 to={`/productlist/pageNumber/${x + 1}`}
-               >
-                 {x + 1}
-               </Link>
-             ))}
-           </div>
+                className={x + 1 === page ? "active" : ""}
+                key={x + 1}
+                to={`/productlist/pageNumber/${x + 1}`}
+              >
+                {x + 1}
+              </Link>
+            ))}
+          </div>
         </>
       )}
     </div>
