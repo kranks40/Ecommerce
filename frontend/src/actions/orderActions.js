@@ -112,13 +112,13 @@ export const orderList = () => async (dispatch, getState) => {
   }
 };
 
-export const listOrders = ({ seller = "" }) => async (dispatch, getState) => {
+export const listOrders = ({ seller = "", pageNumber= '' }) => async (dispatch, getState) => {
   dispatch({ type: ORDER_LISTS_REQUEST });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
+    const { data } = await Axios.get(`/api/orders?pageNumber=${pageNumber}&seller=${seller}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: ORDER_LISTS_SUCCESS, payload: data });

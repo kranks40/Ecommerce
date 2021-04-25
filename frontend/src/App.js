@@ -235,6 +235,11 @@ function App() {
             component={ProductListScreen}
             exact
           />
+          <AdminRoute
+            path="/orderlist/pageNumber/:pageNumber"
+            component={OrderListScreen}
+            exact
+          />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/user/:id/edit" component={UserEditScreen} />

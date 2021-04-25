@@ -19,6 +19,8 @@ orderRouter.get(
   isAuth,
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
+    const pageSize = 8;
+    const page = Number(req.query.pageNumber) || 1;
     //we need to filter orders only for sellers, so we define seller equal to re.query.seller, if it does not exist make the seller an empty sting
     const seller = req.query.seller || "";
     //next create a filter. check if seller exist then the filter would be seller otherwise it would be empty string
@@ -26,11 +28,15 @@ orderRouter.get(
     // in the order model in backend there is a user field with an objectId
     //that reference User. So by using populate it gets the id of user and
     //loads the user information from user collection or table and only puts the name from that table or collection
-    const orders = await Order.find({ ...sellerFilter }).populate(
-      "user",
-      "name"
-    );
-    res.send(orders);
+    
+    const count = await Order.count({
+      ...sellerFilter,
+    })
+    const orders = await Order.find({ ...sellerFilter })
+      .populate("user", "name")
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    res.send({ orders, page, pages: Math.ceil(count / pageSize) });
   })
 );
 

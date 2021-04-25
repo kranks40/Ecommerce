@@ -37,11 +37,6 @@ function HomeScreen() {
     dispatch(listTopSellers());
   }, [dispatch, pageNumber]);
 
-  const getFilterUrl = (filter) => {
-    const filterPage = filter.page || pageNumber;
-    return `/pageNumber/${filterPage}`;
-  };
-
   return (
     <div>
       <h2>Top Sellers</h2>

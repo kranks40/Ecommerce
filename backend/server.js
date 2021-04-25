@@ -1,4 +1,5 @@
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
+import config from './config.js'
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
@@ -10,7 +11,9 @@ import productRouter from "./routers/productRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
 import userRouter from "./routers/userRouter.js";
 
-dotenv.config();
+
+// dotenv.config();
+
 const app = express();
 //we need to parse the body of the http request
 //by adding these two middleware all request to data would be translated
@@ -19,22 +22,23 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/SureBuy", {
+const mongodbUrl = config.MONGODB_URL;
+mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-app.use("/api/uploads", uploadRouter);
+app.use("/api/uploads/", uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 
 app.get("/api/config/paypal", (req, res) => {
-  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+  res.send(config.PAYPAL_CLIENT_ID);
 });
 
 app.get("/api/config/google", (req, res) => {
-  res.send(process.env.GOOGLE_API_KEY || "");
+  res.send(config.GOOGLE_API_KEY);
 });
 
 //path.resolve return current folder, it would be save in the _dirname, then it's used to concatenate the current folder to the uploads folder.
@@ -142,6 +146,6 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(port, () => {
+httpServer.listen(config.PORT, () => {
   console.log(`Serve at http://localhost:${port}`);
 });
