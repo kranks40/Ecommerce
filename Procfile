@@ -1,1 +1,1 @@
-web: node --experimental-modules backend/s
+web: node index.js
