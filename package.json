@@ -2,6 +2,7 @@
   "name": "amazona",
   "type": "module",
   "version": "1.0.0",
+  "description": "Ecommerce website ",
   "main": "index.js",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
@@ -33,8 +34,9 @@
     "eslint": "^7.18.0",
     "eslint-plugin-react": "^7.22.0",
     "nodemon": "^2.0.7"
+  
   },
-  "description": "",
+  
   "engines": {
     "node": "12.4.0",
     "npm": "6.9.0"
