@@ -11,7 +11,7 @@ const productRouter = express.Router();
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 3;
+    const pageSize = 6;
     //get pagenumber from query string or this api. if pagenumber does not exist use 1 as a default pagenumber
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || "";
