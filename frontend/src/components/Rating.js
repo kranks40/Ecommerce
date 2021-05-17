@@ -13,7 +13,7 @@ function Rating(props) {
               ? "fa fa-star-half-o"
               : "fa fa-star-o"
           }
-          aria-hidden="true"
+          //  aria-hidden="true"
         ></i>
       </span>
       <span>
@@ -25,7 +25,7 @@ function Rating(props) {
               ? "fa fa-star-half-o"
               : "fa fa-star-o"
           }
-          aria-hidden="true"
+          // aria-hidden="true"
         ></i>
       </span>
       <span>
@@ -37,7 +37,7 @@ function Rating(props) {
               ? "fa fa-star-half-o"
               : "fa fa-star-o"
           }
-          aria-hidden="true"
+          // aria-hidden="true"
         ></i>
       </span>
       <span>
@@ -49,7 +49,7 @@ function Rating(props) {
               ? "fa fa-star-half-o"
               : "fa fa-star-o"
           }
-          aria-hidden="true"
+          // aria-hidden="true"
         ></i>
       </span>
       <span>

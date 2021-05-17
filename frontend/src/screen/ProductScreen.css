@@ -1,3 +1,7 @@
+.row.top {
+  align-items: flex-start;
+}
+
 .col-1 {
   flex: 1 1 250px;
 }
@@ -35,6 +39,8 @@ button {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f8f8;
+  cursor: pointer;
 }
 
 select::-webkit-scrollbar {
@@ -45,13 +51,8 @@ select {
   overflow: scroll;
 }
 
-button {
-  background-color: #f8f8f8;
-  cursor: pointer;
-}
-
 button.primary {
-  background-color: #f0c040;
+  background-color: #FFD814;
 }
 
 button.block {
