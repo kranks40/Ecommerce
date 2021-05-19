@@ -87,7 +87,7 @@ const reducer = combineReducers({
 });
 
 /* createstore accepts reducer and initialstate */
-const composeEnhancer = window.__REDUX_DEVTOOL_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   initialState,

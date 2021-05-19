@@ -1,5 +1,5 @@
 // import dotenv from "dotenv";
-import config from './config.js'
+import config from "./config.js";
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
@@ -11,7 +11,6 @@ import productRouter from "./routers/productRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
 import userRouter from "./routers/userRouter.js";
 
-
 // dotenv.config();
 
 const app = express();
@@ -22,8 +21,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongodbUrl = config.MONGODB_URL;
-mongoose.connect(mongodbUrl, {
+const mongodb = config.MONGODB_URL;
+mongoose.connect(mongodb, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -48,13 +47,10 @@ app.use(express.static(path.join(__dirname, "/frontend/build")));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
 );
-// app.get("/", (req, res) => {
-//   res.send("Server is ready");
-// });
 
 //this middleware is an error catcher when there is an error in the router using expressAsyncHandler
-app.use((err, req, res, next) => {
-  res.status(500).send({ message: err.message });
+app.use((req, res, next) => {
+  res.status(500).send({ message: "No Network found " });
 });
 
 const port = process.env.PORT || 5000;

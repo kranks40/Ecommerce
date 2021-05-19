@@ -57,7 +57,7 @@ userRouter.post(
         return;
       }
     }
-    // if user does not exist or password does not match a status 401 would be sent.
+    // if user does not exist or password does not match a status 401 would be sent, which means invalid code.
     res.status(401).send({ message: "Invalid email or password" });
   })
 );

@@ -90,7 +90,7 @@ productRouter.get(
         ...product,
         seller: seller._id,
       }));
-      const createdProducts = await Product.insertMany(products);
+      const createdProducts = await Product.insertMany(data.products);
       res.send({ createdProducts });
     } else {
       res
@@ -100,6 +100,7 @@ productRouter.get(
   })
 );
 
+//return details of a product to frontend
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {

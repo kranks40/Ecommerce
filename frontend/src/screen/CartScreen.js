@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import DeleteIcon from "@material-ui/icons/Delete";
+//import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteForeverSharpIcon from "@material-ui/icons/DeleteForeverSharp";
 
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
@@ -9,6 +10,8 @@ import "./CartScreen.css";
 
 function CartScreen(props) {
   const productId = props.match.params.id;
+  // To get qty from url, check props.location.search returns the value after of qty in productscreen.
+  //If it does exist cast to number the value inside query string, but split by equal sign and get the second value. If it does not exist the default value would be one
   const qty = props.location.search
     ? Number(props.location.search.split("=")[1])
     : 1;
@@ -62,7 +65,9 @@ function CartScreen(props) {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value))
+                          addToCart(item.product,
+                          Number(e.target.value)
+                        )
                         )
                       }
                     >
@@ -75,7 +80,7 @@ function CartScreen(props) {
                   </div>
                   <div>${item.price}</div>
                   <div>
-                    <DeleteIcon
+                    <DeleteForeverSharpIcon
                       className="delete"
                       onClick={() => removeFromCartHandler(item.product)}
                     />

@@ -58,7 +58,7 @@ function ProductScreen(props) {
 
   return (
     <div>
-      {/* if loading is true render loadingbox 
+      {/* if loading is true render loadingbox
         else if error exist render messagebox else render product list*/}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -139,6 +139,7 @@ function ProductScreen(props) {
                       </div>
                     </div>
                   </li>
+                  {/* this is conditional rendering. this means that if countinstock is more than zero then the add to cart button would be visible */}
                   {product.countInStock > 0 && (
                     <>
                       <li>

@@ -28,21 +28,6 @@ li {
   color: #e71d36;
 }
 
-input,
-select,
-textarea,
-button {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px #a4a4a4 solid;
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f8f8;
-  cursor: pointer;
-}
-
 select::-webkit-scrollbar {
   display: none;
 }
@@ -57,13 +42,6 @@ button.primary {
 
 button.block {
   width: 100%;
-}
-
-input:hover,
-select:hover,
-textarea:hover,
-button:hover {
-  border: 1px #404040 solid;
 }
 
 .buy {

@@ -101,12 +101,12 @@ img {
 }
 
 img.medium {
-  max-width: 290px;
+  max-width: 190px;
   width: 100%;
 }
 
 img.large {
-  width: 100%;
+  width: 90%;
 }
 
 .price {
@@ -136,6 +136,33 @@ aside {
 
 aside.open {
   transform: translateX(0);
+}
+
+
+
+input,
+select,
+textarea,
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px #a4a4a4 solid;
+  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {  
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+input:hover,
+select:hover,
+textarea:hover,
+button:hover {
+  border: 1px #404040 solid;
 }
 
 button.open-sidebar {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
-import ShoppingCartSharpIcon from "@material-ui/icons/ShoppingCartSharp";
 
 import CartScreen from "./screen/CartScreen";
 import HomeScreen from "./screen/HomeScreen";
@@ -85,7 +84,8 @@ function App() {
 
           <div>
             <Link to="/cart">
-              <ShoppingCartSharpIcon style={{ fontSize: "22px" }} />
+            <i className="fa fa-shopping-basket"></i>
+              {/* <ShoppingCartSharpIcon style={{ fontSize: "25px" }} /> */}
               {/* compare cartitem.length if it's greater than zero then render object  */}
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
