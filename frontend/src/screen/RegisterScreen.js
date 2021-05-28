@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+//import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
 import { register } from "../actions/userActions";
@@ -99,17 +99,17 @@ function RegisterScreen(props) {
           ></input>
         </div>
 
-        <div className='register__button'>
+        <div>
           <label />
-          <Button className="primary" type="submit">
-            <h2>Register</h2>
-          </Button>
+          <button className="primary" type="submit">
+            Register
+          </button>
         </div>
 
         <div>
           <label />
           <div>
-            Already have an account ?{" "}
+            Already have an account?{" "}
             {/* this would pass the redirect to the signin */}
             <Link to={`/signin?redirect${redirect}`}>Sign-In</Link>
           </div>

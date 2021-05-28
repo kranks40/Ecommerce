@@ -14,7 +14,7 @@
     display: block;
 }
 
-.register__button > button {
+/* .register__button > button {
     border-radius: 5px;
     height: 40px;
     text-transform: inherit;
@@ -23,4 +23,4 @@
 
 .register__button > button:hover {
     background-color: #F2C85F;
-}
+} */

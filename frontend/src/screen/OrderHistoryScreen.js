@@ -1,19 +1,18 @@
-import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderHistoryScreen.css";
 import React, { useEffect } from "react";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { orderList } from "../actions/orderActions";
+import { listOrderMine } from "../actions/orderActions";
 
 function OrderHistoryScreen(props) {
-  const orderMyList = useSelector((state) => state.orderMyList);
-  const { loading, error, orders } = orderMyList;
+  const orderMineList = useSelector((state) => state.orderMineList);
+  const { loading, error, orders } = orderMineList;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(orderList());
+    dispatch(listOrderMine());
   }, [dispatch]);
 
   return (
@@ -40,12 +39,20 @@ function OrderHistoryScreen(props) {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.createdAt.toString().substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.toString().substring(0, 10) : "No"}</td>
-                <td>{order.isDelivered ? order.deliveredAt.toString().substring(0, 10) : "No"}</td>
-                <td className="detail__button">
-                  <Button
+                <td>{order.createdAt.substring(0, 10)}</td>
+                <td>${order.totalPrice.toFixed(2)}</td>
+                <td>
+                  {order.isPaid
+                    ? order.paidAt.substring(0, 10)
+                    : "No"}
+                </td>
+                <td>
+                  {order.isDelivered
+                    ? order.deliveredAt.substring(0, 10)
+                    : "No"}
+                </td>
+                <td>
+                  <button
                     variant="contained"
                     type="button"
                     className="small"
@@ -53,8 +60,8 @@ function OrderHistoryScreen(props) {
                       props.history.push(`/order/${order._id}`);
                     }}
                   >
-                    Details
-                  </Button>
+                  DETAILS
+                  </button>
                 </td>
               </tr>
             ))}

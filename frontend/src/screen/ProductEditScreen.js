@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "../../../node_modules/@material-ui/core/index";
 import Axios from "axios";
 
 import { detailsProduct, updateProduct } from "../actions/productAction";
@@ -152,7 +151,7 @@ function ProductEditScreen(props) {
                 onChange={uploadFileHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}
-              {error && <MessageBox variant="danger">{errorUpload}</MessageBox>}
+              {errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox>}
             </div>
 
             <div>
@@ -204,12 +203,11 @@ function ProductEditScreen(props) {
               ></textarea>
             </div>
 
-            <div className="update__button">
-              <label>
-                <Button className="primary" type="submit">
-                  <h2>Update</h2>
-                </Button>
-              </label>
+            <div>
+              <label/>
+                <button className="primary" type="submit">
+                  Update
+                </button>
             </div>
           </>
         )}

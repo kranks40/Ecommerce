@@ -3,7 +3,7 @@
     color: #c0c0c0;
     flex: 1;
     padding: 10px;
-    font-weight: bold;
+    font-weight:600;
 }
 
 .checkout > div.active {

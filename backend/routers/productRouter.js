@@ -116,21 +116,22 @@ productRouter.get(
   })
 );
 
+//api for creating a new product
 productRouter.post(
   "/",
   isAuth,
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-      name: "sample name",
+      name: "sample name" + Date.now(),
       seller: req.user._id,
       image: "/images/p1.jpg",
       price: 0,
       category: "sample category",
       brand: "sample brand",
       countInStock: 0,
-      rating: 4.5,
-      numReviews: 10,
+      rating: 0,
+      numReviews: 0,
       description: "sample description",
     });
     const createdProduct = await product.save();

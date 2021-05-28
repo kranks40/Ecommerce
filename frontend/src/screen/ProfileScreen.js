@@ -5,7 +5,6 @@ import MessageBox from "../components/MessageBox";
 
 import { useDispatch, useSelector } from "react-redux";
 import { detailsUser, updateUserProfile } from "../actions/userActions";
-import { Button } from "@material-ui/core";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstatnts";
 
 function ProfileScreen() {
@@ -20,15 +19,18 @@ function ProfileScreen() {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   //getting user details from redux store
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const {
     success: successUpdate,
     error: errorUpdate,
     loading: loadingUpdate,
   } = userUpdateProfile;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -94,7 +96,6 @@ function ProfileScreen() {
                 id="name"
                 placeholder="Enter Name"
                 value={name}
-                //required
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
@@ -106,7 +107,6 @@ function ProfileScreen() {
                 id="email"
                 placeholder="Enter Email"
                 value={email}
-                //required
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
@@ -117,7 +117,6 @@ function ProfileScreen() {
                 type="password"
                 id="password"
                 placeholder="Enter Password"
-                //required
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
@@ -128,7 +127,6 @@ function ProfileScreen() {
                 type="password"
                 id="confirmPassword"
                 placeholder="Enter confirm Password"
-                //required
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
@@ -175,12 +173,11 @@ function ProfileScreen() {
               </>
             )}
 
-            <div className="update__button">
-              <label>
-                <Button className="primary" type="submit">
-                  <h1>Update</h1>
-                </Button>
-              </label>
+            <div>
+              <label/>
+                <button className="primary" type="submit">
+                  Update
+                </button>
             </div>
           </>
         )}

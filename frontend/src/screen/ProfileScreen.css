@@ -14,7 +14,7 @@
     display: block;
 }
 
-.update__button button {
+/* .update__button button {
     border-radius: 5px;
     height: 40px;
     width: 100%;
@@ -24,4 +24,4 @@
 
 .update__button button:hover {
     background-color: #F2C85F;
-}
+} */

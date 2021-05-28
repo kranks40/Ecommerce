@@ -14,6 +14,7 @@ import {
 
 const orderRouter = express.Router();
 
+//api to get list of orders
 orderRouter.get(
   "/",
   isAuth,
@@ -28,10 +29,10 @@ orderRouter.get(
     // in the order model in backend there is a user field with an objectId
     //that reference User. So by using populate it gets the id of user and
     //loads the user information from user collection or table and only puts the name from that table or collection
-    
+
     const count = await Order.count({
       ...sellerFilter,
-    })
+    });
     const orders = await Order.find({ ...sellerFilter })
       .populate("user", "name")
       .skip(pageSize * (page - 1))
@@ -87,6 +88,7 @@ orderRouter.get(
   })
 );
 
+//return orders from current user to orderHistory screen
 orderRouter.get(
   "/mine",
   isAuth,
@@ -122,6 +124,7 @@ orderRouter.post(
   })
 );
 
+//getting order details
 orderRouter.get(
   "/:id",
   isAuth,
@@ -192,6 +195,7 @@ orderRouter.delete(
   })
 );
 
+//api to show order delivered
 orderRouter.put(
   "/:id/deliver",
   isAuth,
@@ -200,7 +204,7 @@ orderRouter.put(
     const order = await Order.findById(req.params.id);
     if (order) {
       order.isDelivered = true;
-      order.deliveredAt = new Date();
+      order.deliveredAt = Date.now();
       const updatedOrder = await order.save();
       res.send({ message: "Order Delivered", order: updatedOrder });
     } else {

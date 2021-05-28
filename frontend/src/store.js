@@ -26,11 +26,11 @@ import {
   orderListReducer,
   orderCreateReducer,
   orderDetailsReducer,
-  orderMyListReducer,
   orderPayReducer,
   orderDeleteReducer,
   orderDeliverReducer,
   orderSummaryReducer,
+  orderMineListReducer,
 } from "./reducers/orderReducers";
 
 const initialState = {
@@ -67,7 +67,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
-  orderMyList: orderMyListReducer,
+  orderMineList: orderMineListReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   productCreate: productCreateReducer,
@@ -80,7 +80,7 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   userTopSellerList: userTopSellerListsReducer,
-  productCategoryList:productCategoryListReducer,
+  productCategoryList: productCategoryListReducer,
   productComment: productCommentReducer,
   userAddressMap: userAddressMapReducer,
   orderSummary: orderSummaryReducer,

@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+//import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../actions/cartActions";
@@ -92,8 +92,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="fullName"
-            autoCapitalize='words'
-            autoCorrect={true}
+            autoCapitalize="words"
+            autoCorrect='true'
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -105,8 +105,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="address"
-            autoCapitalize={true}
-            autoCorrect={true}
+            autoCapitalize='words'
+            autoCorrect='true'
             placeholder="Street address or P.O. Box"
             value={address}
             required
@@ -128,8 +128,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="city"
-            autoCapitalize={true}
-            autoCorrect={true}
+            autoCapitalize='words'
+            autoCorrect='true'
             value={city}
             required
             onChange={(e) => setCity(e.target.value)}
@@ -152,8 +152,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="country"
-            autoCapitalize={true}
-            autoCorrect={true}
+            autoCapitalize='words'
+            autoCorrect='true'
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}
@@ -167,11 +167,11 @@ function ShippingAddressScreen(props) {
           </button>
         </div>
 
-        <div className="shipping__button">
+        <div>
           <label />
-          <Button className="primary" type="submit">
-            <h2>Continue</h2>
-          </Button>
+          <button className="primary" type="submit">
+            Continue
+          </button>
         </div>
       </form>
     </div>

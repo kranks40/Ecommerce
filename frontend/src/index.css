@@ -139,7 +139,6 @@ aside.open {
 }
 
 
-
 input,
 select,
 textarea,
@@ -163,6 +162,13 @@ select:hover,
 textarea:hover,
 button:hover {
   border: 1px #404040 solid;
+}
+
+button.primary {
+  background-color: #f0c040;
+}
+button.block {
+  width: 100%;
 }
 
 button.open-sidebar {
@@ -192,4 +198,63 @@ aside li {
 button.close-sidebar {
   padding: 0.3rem 0.8rem;
 }
+
+/* Dropdown */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  min-width: 120px;
+  padding: 10px;
+  z-index: 1;
+  background-color: #203040;
+  margin: 0;
+  margin-top: 4px;
+  border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  
+}
+
+/* Alert */
+.loading {
+  display: block !important;
+}
+
+.alert-success {
+  color: #212121;
+  background-color: #64dd17;
+}
+
+/* .danger {
+  color: #a02020;
+  color: #212121;
+  background-color: #ffe0e0e0;
+  background-color: #b71c1c;
+} */
+
+.alert {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+
+.alert-danger {
+  color: #212121;
+  background-color: #e57373;
+}
+
+
 

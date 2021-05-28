@@ -14,7 +14,7 @@
     display: block;
 }
 
-.login__button button {
+/* .login__button button {
     border-radius: 5px;
     height: 50px;
     text-transform: inherit;
@@ -23,4 +23,4 @@
 
 .login__button button:hover {
     background-color: #F2C85F;
-}
+} */

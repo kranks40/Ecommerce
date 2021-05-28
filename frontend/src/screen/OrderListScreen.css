@@ -16,11 +16,11 @@ button.small-detail {
     border: 1px solid;
 }
 
-button.small-delete:hover {
+button.small-detail:hover {
     background-color: #00e575;
 }
 
-button.small-detail:hover {
+button.small-delete:hover {
     background-color: #63a4ff;
 }
 

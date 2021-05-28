@@ -16,13 +16,17 @@ import {
   ORDER_DELIVERED_RESET,
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
-import { Button } from "../../../node_modules/@material-ui/core/index";
+;
 
 function OrderScreen(props) {
   const orderId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   const orderPay = useSelector((state) => state.orderPay);
   const {
@@ -38,8 +42,6 @@ function OrderScreen(props) {
     success: successDeliver,
   } = orderDeliver;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -100,14 +102,17 @@ function OrderScreen(props) {
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:</strong> {order.ShippingAddress.fullName} <br />
+                </p>
+                <p>
                   <strong>Address:</strong> {order.ShippingAddress.address},{" "}
                   {order.ShippingAddress.city},{" "}
                   {order.ShippingAddress.postalCode},{" "}
                   {order.ShippingAddress.country}{" "}
                 </p>
+
                 {order.isDelivered ? (
                   <MessageBox variant="success">
-                    Delivered at {order.deliveredAt.toString().substring(0, 10)}
+                    Delivered at {order.deliveredAt.substring(0, 10)}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
@@ -123,7 +128,7 @@ function OrderScreen(props) {
                 </p>
                 {order.isPaid ? (
                   <MessageBox variant="success">
-                    Paid at {order.paidAt.toString().substring(0, 10)}
+                    Paid at {order.paidAt.substring(0, 10)}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
@@ -228,9 +233,13 @@ function OrderScreen(props) {
                   {errorDeliver && (
                     <MessageBox variant="danger">{errorDeliver}</MessageBox>
                   )}
-                  <Button type="button" className='primary block' onClick={deliverHandler}>
+                  <button
+                    type="button"
+                    className="primary block"
+                    onClick={deliverHandler}
+                  >
                     Deliver Order
-                  </Button>
+                  </button>
                 </li>
               )}
               {}

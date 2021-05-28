@@ -17,26 +17,3 @@ img.small {
     color: #3CAE2B;
 }
 
-/* Dropdown */
-.dropdown {
-    display: inline-block;
-    position: relative;
-}
-
-.dropdown-content {
-    position: absolute;
-    display: none;
-    right: 0;
-    min-width: 120px;
-    padding: 10px;
-    z-index: 1;
-    background-color: #203040;
-    margin: 0;
-    margin-top: 4px;
-    border-radius: 5px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    
-}

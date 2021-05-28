@@ -79,9 +79,13 @@ function ProductListScreen(props) {
     <div>
       <div className="row">
         <h1>Products</h1>
-        <Button type="button" className="create" onClick={createHandler}>
+        <button
+          type="button"
+          className="primary__product"
+          onClick={createHandler}
+        >
           Create Product
-        </Button>
+        </button>
       </div>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
@@ -119,6 +123,7 @@ function ProductListScreen(props) {
                   <td className="row__button">
                     <Button
                       type="button"
+                      variant="contained"
                       className="small-edit"
                       onClick={() =>
                         props.history.push(`/product/${product._id}/edit`)
@@ -129,6 +134,7 @@ function ProductListScreen(props) {
 
                     <Button
                       type="button"
+                      variant="contained"
                       className="small-delete"
                       onClick={() => deleteHandler(product)}
                     >

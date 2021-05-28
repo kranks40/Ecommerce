@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./LoadingBox.css";
+
 
 function LoadingBox() {
   return (

@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkout from "../components/Checkout";
 import "./PlaceOrderScreen.css";
 import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+//import Button from "@material-ui/core/Button";
 import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
-function PlaceOrderScreen(props) {
+function PlaceOrderScreen({ history }) {
   const cart = useSelector((state) => state.cart);
   if (!cart.paymentMethod) {
-    props.history.push("/payment");
+    history.push("/payment");
   }
 
   const orderCreate = useSelector((state) => state.orderCreate);
@@ -37,10 +37,10 @@ function PlaceOrderScreen(props) {
   useEffect(() => {
     //if success is true the order created was successful then redirect user to order details screen then reset the basket to empty
     if (success) {
-      props.history.push(`/order/${order._id}`);
+      history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [dispatch, order, props.history, success]);
+  }, [dispatch, order, history, success]);
 
   return (
     <div>
@@ -52,13 +52,13 @@ function PlaceOrderScreen(props) {
               <div className="placeOrder">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong>
+                  <strong>Name:</strong>{" "}
                   {cart.ShippingAddress.fullName} <br />
-                  <strong>Address:</strong>
+                </p>
+                  <strong>Address:</strong>{" "}
                   {cart.ShippingAddress.address},{cart.ShippingAddress.city},
                   {cart.ShippingAddress.postalCode},
                   {cart.ShippingAddress.country}
-                </p>
               </div>
             </li>
 
@@ -111,7 +111,7 @@ function PlaceOrderScreen(props) {
               </li>
               <li>
                 <div className="row">
-                  <div>Item</div>
+                  <div>Items</div>
                   <div> ${cart.itemsPrice.toFixed(2)}</div>
                 </div>
               </li>
@@ -141,20 +141,20 @@ function PlaceOrderScreen(props) {
                 </div>
               </li>
               <div>
-                <li className="order__button">
-                  <Button
+                <li>
+                  <button
                     variant="contained"
                     type="button"
                     onClick={placeOrderHandler}
                     className="primary block"
                     disabled={cart.cartItems.length === 0}
                   >
-                    <h1>Place Order</h1>
-                  </Button>
+                    Place Order
+                  </button>
                 </li>
               </div>
               {/* check if loading is true then rednder loadingbox component. check error and if exist render messagebox component */}
-              {loading && <LoadingBox />}
+              {loading && <LoadingBox ></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}
             </ul>
           </div>

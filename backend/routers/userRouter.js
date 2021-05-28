@@ -84,6 +84,7 @@ userRouter.post(
   })
 );
 
+//getting user details for profile screen
 userRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
@@ -96,6 +97,7 @@ userRouter.get(
   })
 );
 
+//updates the user profile
 userRouter.put(
   "/profile",
   isAuth,

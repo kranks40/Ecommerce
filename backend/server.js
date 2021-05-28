@@ -1,4 +1,4 @@
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import config from "./config.js";
 import express from "express";
 import mongoose from "mongoose";
@@ -11,18 +11,17 @@ import productRouter from "./routers/productRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
 import userRouter from "./routers/userRouter.js";
 
-// dotenv.config();
+dotenv.config();
 
 const app = express();
-//we need to parse the body of the http request
-//by adding these two middleware all request to data would be translated
-//to the application
 
+//we need to parse the body of the http request
+//by adding these two middleware all request to data would be translated to req.body
+//to the application
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const mongodb = config.MONGODB_URL;
-mongoose.connect(mongodb, {
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/SureBuy", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -33,7 +32,7 @@ app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 
 app.get("/api/config/paypal", (req, res) => {
-  res.send(config.PAYPAL_CLIENT_ID);
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
 app.get("/api/config/google", (req, res) => {

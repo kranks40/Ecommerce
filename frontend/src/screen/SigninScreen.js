@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+//import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 
 import { signin } from "../actions/userActions";
@@ -53,6 +53,8 @@ function SigninScreen(props) {
           <input
             type="email"
             id="email"
+            autoComplete='true'
+            autoCapitalize='words'
             placeholder="Enter Email"
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -64,21 +66,23 @@ function SigninScreen(props) {
           <input
             type="password"
             id="password"
+            autoComplete='true'
+            autoCapitalize='words'
             placeholder="Enter Password"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
 
-        <div className='login__button'>
+        <div>
           <label />
-          <Button className="primary" type="submit">
-            <h2>Sign In</h2>
-          </Button>
-          <label />
+          <button className="primary" type="submit">
+            Sign In
+          </button>
         </div>
 
         <div>
+        <label />
           <div>
             New customer?{" "}
             {/* this would pass the redirect to register */}
