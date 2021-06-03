@@ -4,8 +4,8 @@
 }
 
 .map-input-box {
-    border-radius: 0 5px 5px 0;
-    border-right: none;
+    /* border-radius: 0 5px 5px 0; */
+    /* border-right: none; */
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -23,9 +23,9 @@
 }
 
 .map-input-box button {
-    border-radius: 0 5px 5px 0;
-    border-left: none;
-    margin-right: 5px;
-    /* border-radius: 0 1rem 1rem 0; */
-    /* border-left: 0; */
+    /* border-radius: 0 5px 5px 0; */
+    /* border-left: none; */
+    /* margin-right: 5px; */
+    border-radius: 0 1rem 1rem 0;
+    border-left: 0;
 }

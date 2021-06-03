@@ -36,7 +36,7 @@ app.get("/api/config/paypal", (req, res) => {
 });
 
 app.get("/api/config/google", (req, res) => {
-  res.send(config.GOOGLE_API_KEY);
+  res.send(process.env.GOOGLE_API_KEY || "");
 });
 
 //path.resolve return current folder, it would be save in the _dirname, then it's used to concatenate the current folder to the uploads folder.
@@ -48,8 +48,8 @@ app.get("*", (req, res) =>
 );
 
 //this middleware is an error catcher when there is an error in the router using expressAsyncHandler
-app.use((req, res, next) => {
-  res.status(500).send({ message: "No Network found " });
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;
@@ -133,7 +133,7 @@ io.on("connection", (socket) => {
         user.messages.push(message);
       } else {
         io.to(socket.id).emit("message", {
-          name: "Admin",
+          name: { isAdmin },
           body: "Sorry. I am not online right now",
         });
       }
@@ -141,6 +141,6 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(config.PORT, () => {
+httpServer.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });

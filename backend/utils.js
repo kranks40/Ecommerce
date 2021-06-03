@@ -102,7 +102,7 @@ export const payOrderEmailTemplate = (order) => {
     <tr>
     <td>${item.name}</td>
     <td align="center">${item.qty}</td>
-    <td align="right">${item.price.toFixed(2)}</td>
+    <td align="right">$${item.price.toFixed(2)}</td>
     </tr>
     `
       )
@@ -136,11 +136,11 @@ export const payOrderEmailTemplate = (order) => {
     </table>
     <h2>Shipping Address</h2>
     <p>
-    ${order.shippingAddress.fullname},</br>
-    ${order.shippingAddress.Address},</br>
-    ${order.shippingAddress.city},</br>
-    ${order.shippingAddress.country},</br>
-    ${order.shippingAddress.postalCode},</br>
+    ${order.ShippingAddress.fullName},</br>
+    ${order.ShippingAddress.address},</br>
+    ${order.ShippingAddress.city},</br>
+    ${order.ShippingAddress.postalCode},</br>
+    ${order.ShippingAddress.country},</br>
     </p>
     </hr>
     <p>Thanks for shopping wih SureBuy.</p>

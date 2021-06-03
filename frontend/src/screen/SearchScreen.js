@@ -37,7 +37,7 @@ function SearchScreen(props) {
   useEffect(() => {
     dispatch(
       listProducts({
-       pageNumber,
+        pageNumber,
         name: name !== "all" ? name : "",
         category: category !== "all" ? category : "",
         min,
@@ -105,6 +105,7 @@ function SearchScreen(props) {
                 {categories.map((c) => (
                   <li key={c}>
                     <Link
+                    //if the category in the list is equal to the category in the url then apply class active otherwise empty as classname
                       className={c === category ? "active" : ""}
                       to={getFilterUrl({ category: c })}
                     >
@@ -166,7 +167,7 @@ function SearchScreen(props) {
                   <Product key={product._id} product={product} />
                 ))}
               </div>
-              
+
               <div className="row center pagination">
                 {/* converting pages to link */}
                 {[...Array(pages).keys()].map((x) => (

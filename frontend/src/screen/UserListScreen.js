@@ -34,7 +34,7 @@ function UserListScreen(props) {
   };
 
   return (
-    <div className="row">
+    <div>
       <h1>Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}

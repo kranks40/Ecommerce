@@ -14,12 +14,13 @@ function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
 
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
   const [qty, setQty] = useState(1);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   const productComment = useSelector((state) => state.productComment);
   const {
@@ -28,8 +29,18 @@ function ProductScreen(props) {
     success: successReview,
   } = productComment;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    if (successReview) {
+      window.alert("Review Submitted Successfully");
+      setRating("");
+      setComment("");
+      dispatch({ type: PRODUCT_COMMENT_RESET });
+    }
+    dispatch(detailsProduct(productId));
+  }, [dispatch, productId, successReview]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -41,16 +52,6 @@ function ProductScreen(props) {
       alert("Please enter comment and rating");
     }
   };
-
-  useEffect(() => {
-    if (successReview) {
-      window.alert("Review Submitted Successfully");
-      setRating("");
-      setComment("");
-      dispatch({ type: PRODUCT_COMMENT_RESET });
-    }
-    dispatch(detailsProduct(productId));
-  }, [dispatch, productId, successReview]);
 
   const addToCartHandler = () => {
     props.history.push(`/cart/${productId}?qty=${qty}`);
@@ -189,7 +190,7 @@ function ProductScreen(props) {
               {product.reviews.map((review) => (
                 <li key={review._id}>
                   <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=""></Rating>
+                  <Rating rating={review.rating} caption=" "></Rating>
                   <p>{review.createdAt.substring(0, 10)}</p>
                   <p>{review.comment}</p>
                 </li>
@@ -208,11 +209,11 @@ function ProductScreen(props) {
                         onChange={(e) => setRating(e.target.value)}
                       >
                         <option value="">Select...</option>
-                        <option value="1">Poor</option>
-                        <option value="2">Fair</option>
-                        <option value="3">Good</option>
-                        <option value="4">Very good</option>
-                        <option value="5">Excellent</option>
+                        <option value="1">1- Poor</option>
+                        <option value="2">2- Fair</option>
+                        <option value="3">3- Good</option>
+                        <option value="4">4- Very good</option>
+                        <option value="5">5- Excellent</option>
                       </select>
                     </div>
                     <div>
@@ -224,11 +225,11 @@ function ProductScreen(props) {
                       ></textarea>
                     </div>
                     <div>
-                      <label>
-                        <button className="primary block" type="submit">
-                          Submit
-                        </button>
-                      </label>
+                      <label />
+                      <button className="primary" type="submit">
+                        Submit
+                      </button>
+
                       <div>
                         {loadingReview && <LoadingBox></LoadingBox>}
                         {errorReview && (

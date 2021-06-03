@@ -48,7 +48,7 @@ productRouter.get(
         ? { rating: -1 }
         : { _id: -1 };
 
-    const count = await Product.count({
+    const count = await Product.collection.countDocuments({
       ...sellerFilter,
       ...nameFilter,
       ...categoryFilter,
@@ -90,7 +90,7 @@ productRouter.get(
         ...product,
         seller: seller._id,
       }));
-      const createdProducts = await Product.insertMany(data.products);
+      const createdProducts = await Product.insertMany(products);
       res.send({ createdProducts });
     } else {
       res

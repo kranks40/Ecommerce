@@ -131,7 +131,7 @@ function ProfileScreen() {
               ></input>
             </div>
 
-            {/* if isSeller then render seller form */}
+            {/* if user.isSeller is true then render seller form */}
             {user.isSeller && (
               <>
                 <h2>Seller</h2>
@@ -142,7 +142,6 @@ function ProfileScreen() {
                     id="sellerName"
                     placeholder="Enter Seller Name"
                     value={sellerName}
-                    //required
                     onChange={(e) => setSellerName(e.target.value)}
                   ></input>
                 </div>
@@ -154,7 +153,6 @@ function ProfileScreen() {
                     id="sellerLogo"
                     placeholder="Enter Seller Logo"
                     value={sellerLogo}
-                    //required
                     onChange={(e) => setSellerLogo(e.target.value)}
                   ></input>
                 </div>
@@ -166,7 +164,6 @@ function ProfileScreen() {
                     id="sellerDescription"
                     placeholder="Enter Seller Description"
                     value={sellerDescription}
-                    //required
                     onChange={(e) => setSellerDescription(e.target.value)}
                   ></input>
                 </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "../../../node_modules/@material-ui/core/index";
 
 import { detailsUser, updateUser } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
@@ -45,7 +44,6 @@ function UserEditScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch update user
     dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
   };
   return (
@@ -74,6 +72,7 @@ function UserEditScreen(props) {
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
+
             <div>
               <label htmlFor="email">Email</label>
               <input
@@ -84,6 +83,7 @@ function UserEditScreen(props) {
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
+
             <div>
               <label htmlFor="isSeller">Is Seller</label>
               <input
@@ -93,6 +93,7 @@ function UserEditScreen(props) {
                 onChange={(e) => setIsSeller(e.target.checked)}
               ></input>
             </div>
+
             <div>
               <label htmlFor="isAdmin">Is Admin</label>
               <input
@@ -102,10 +103,11 @@ function UserEditScreen(props) {
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></input>
             </div>
-            <div className="edit__button">
-              <Button type="submit" className="primary">
-                <h1>Update</h1>
-              </Button>
+
+            <div>
+              <button type="submit" className="primary">
+                Update
+              </button>
             </div>
           </>
         )}

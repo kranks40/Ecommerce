@@ -93,7 +93,7 @@ function ShippingAddressScreen(props) {
             type="text"
             id="fullName"
             autoCapitalize="words"
-            autoCorrect='true'
+            autoCorrect="true"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -105,8 +105,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="address"
-            autoCapitalize='words'
-            autoCorrect='true'
+            autoCapitalize="words"
+            autoCorrect="true"
             placeholder="Street address or P.O. Box"
             value={address}
             required
@@ -128,8 +128,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="city"
-            autoCapitalize='words'
-            autoCorrect='true'
+            autoCapitalize="words"
+            autoCorrect="true"
             value={city}
             required
             onChange={(e) => setCity(e.target.value)}
@@ -152,8 +152,8 @@ function ShippingAddressScreen(props) {
           <input
             type="text"
             id="country"
-            autoCapitalize='words'
-            autoCorrect='true'
+            autoCapitalize="words"
+            autoCorrect="true"
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}

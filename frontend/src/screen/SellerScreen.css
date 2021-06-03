@@ -7,10 +7,10 @@
 }
 
 .p-1 {
-    padding: 1rem;
+    padding: 14px;
 }
 
-.seller {
+.seller-body {
     border: 1px #c0c0c0 solid;
     background-color: #f8f8f8;
     border-radius: 5px;

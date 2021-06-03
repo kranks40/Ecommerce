@@ -60,7 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="row">
+        <header className="row search">
           <div>
             <button
               className="open-sidebar"
@@ -73,7 +73,8 @@ function App() {
               SureBuy
             </Link>
           </div>
-          <div>
+          
+          <div className="search">
             {/* pass react router dom properties to the searchbox using render fuction  */}
             <Route
               render={({ history }) => (
@@ -84,13 +85,14 @@ function App() {
 
           <div>
             <Link to="/cart">
-            <i className="fa fa-shopping-basket"></i>
+              <i className="fa fa-shopping-basket"></i>
               {/* <ShoppingCartSharpIcon style={{ fontSize: "25px" }} /> */}
               {/* compare cartitem.length if it's greater than zero then render object  */}
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
+            
             {/* if userInfo does exist then render username with a link 
             if userInfo does not exist then render signin link  */}
             {userInfo ? (
@@ -115,6 +117,7 @@ function App() {
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
+
             {/* If userInfo exist and if userInfo.isSeller is true then render seller menu  */}
             {userInfo && userInfo.isSeller && (
               <div className="dropdown">
@@ -132,11 +135,12 @@ function App() {
                 </ul>
               </div>
             )}
+
             {/* create another conditional rendering by checking if userInfo and userInfo.isAdmin exist render a dropdown with admin title and links to admin  */}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
-                  Admin{' '} <i className="fa fa-caret-down"></i>
+                  Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -163,6 +167,7 @@ function App() {
             )}
           </div>
         </header>
+
         {/* create aside elements of html5. set className conditional. If sidebar is open then set the class to open otherwise set class to empty string*/}
         <aside className={sidebarIsOpen ? "open" : ""}>
           <ul className="categories">
@@ -208,22 +213,22 @@ function App() {
           <PrivateRoute path="/order/:id" component={OrderScreen} />
           <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
           <PrivateRoute path="/map" component={MapScreen} />
-          <PrivateRoute
+          <Route
             path="/search/name/:name?"
             component={SearchScreen}
             exact
           />
-          <PrivateRoute
+          <Route
             path="/search/category/:category"
             component={SearchScreen}
             exact
           />
-          <PrivateRoute
+          <Route
             path="/search/category/:category/name/:name"
             component={SearchScreen}
             exact
           />
-          <PrivateRoute
+          <Route
             path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
             component={SearchScreen}
             exact

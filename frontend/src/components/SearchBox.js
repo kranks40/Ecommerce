@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 
-import './SearchBox.css';
+import "./SearchBox.css";
 
 function SearchBox(props) {
   const [name, setName] = useState("");
@@ -13,19 +13,19 @@ function SearchBox(props) {
   };
 
   return (
-    <form onSubmit={submitHandler} className="search">
-      <div className="row">
-        <input
-          type="text"
-          name="q"
-          id="q"
-          onChange={(e) => setName(e.target.value)}
-        ></input>
-        <button className="primary" type="submit">
-          <SearchIcon></SearchIcon>
-        </button>
-      </div>
-    </form>
+      <form onSubmit={submitHandler} className="search" >
+        <div className="row">
+          <input
+            type="text"
+            name="q"
+            id="q"
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+          <button className="primary" type="submit">
+            <SearchIcon></SearchIcon>
+          </button>
+        </div>
+      </form>
   );
 }
 

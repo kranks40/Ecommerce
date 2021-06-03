@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 import Product from "../components/Product";
@@ -25,8 +26,7 @@ function HomeScreen() {
     users: sellers,
   } = userTopSellerList;
 
-  /*useEffect is run atfter your components is rendered. 
-    It accepts two parameters, a function and an array */
+  /*useEffect is run atfter your components are rendered.It accepts two parameters, a function and an array */
   useEffect(() => {
     //the empty object means that we don't want all products filtered
     dispatch(
@@ -48,12 +48,11 @@ function HomeScreen() {
         <>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
           <Carousel
+            showArrow={true}
+            showThumbs={false}
             autoPlay={true}
-            autoPlayInterval="1000"
+            autoPlayInterval="9000"
             autoPlayDirection="ltr"
-            fadeOutAnimation={true}
-            mouseTrackingEnabled={true}
-            disableAutoPlayOnAction={true}
             infiniteLoop={true}
           >
             {sellers.map((seller) => (

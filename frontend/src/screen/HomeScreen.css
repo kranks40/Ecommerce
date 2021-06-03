@@ -21,7 +21,7 @@
 /* Carousel */
 .carousel .slide img {
   background-color: black;
-  width: 100%;
+  max-width: 100%;
   height: 300px;
   object-fit: contain;
 }
@@ -39,5 +39,5 @@
 }
 
 .pagination a.active {
-  font-weight:700;
+  font-weight:bolder;
 }

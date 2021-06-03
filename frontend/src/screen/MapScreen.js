@@ -58,8 +58,7 @@ function MapScreen(props) {
 
   const dispatch = useDispatch();
 
-  const onConfirm = (e) => {
-    e.preventDefault();
+  const onConfirm = () => {
     const places = placeRef.current.getPlaces();
     if (places && places.length === 1) {
       dispatch({
