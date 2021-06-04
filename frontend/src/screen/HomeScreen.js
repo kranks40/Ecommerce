@@ -38,7 +38,7 @@ function HomeScreen() {
   }, [dispatch, pageNumber]);
 
   return (
-    <div>
+    <div className="home">
       <h2>Top Sellers</h2>
       {loadingTopSeller ? (
         <LoadingBox></LoadingBox>

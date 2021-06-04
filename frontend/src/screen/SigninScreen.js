@@ -41,9 +41,10 @@ function SigninScreen(props) {
   return (
     <div>
       <form className="signin__form" onSubmit={submitHandler}>
-        <div>
+        <div className="signin">
           <h1>Sign In</h1>
         </div>
+
         {/* if loading is true then show loadingbox and if error is true show messagebox */}
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
@@ -53,8 +54,8 @@ function SigninScreen(props) {
           <input
             type="email"
             id="email"
-            autoComplete='true'
-            autoCapitalize='words'
+            autoComplete="true"
+            autoCapitalize="words"
             placeholder="Enter Email"
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -66,8 +67,8 @@ function SigninScreen(props) {
           <input
             type="password"
             id="password"
-            autoComplete='true'
-            autoCapitalize='words'
+            autoComplete="true"
+            autoCapitalize="words"
             placeholder="Enter Password"
             required
             onChange={(e) => setPassword(e.target.value)}
@@ -81,11 +82,18 @@ function SigninScreen(props) {
           </button>
         </div>
 
+        <div className="disclaimer">
+          <p>
+            By signing in you agree to the Conditions of the use & sale.
+            Please see our Privacy Notice, our Cookies Notice and our Interest
+            based Ads Notice.
+          </p>
+        </div>
+
         <div>
-        <label />
+          <label />
           <div>
-            New customer?{" "}
-            {/* this would pass the redirect to register */}
+            New customer? {/* this would pass the redirect to register */}
             <Link to={`/register?redirect${redirect}`}>
               Create your Account
             </Link>

@@ -48,7 +48,7 @@ function RegisterScreen(props) {
   return (
     <div>
       <form className="register__form" onSubmit={submitHandler}>
-        <div>
+        <div className="register">
           <h1>Create Account</h1>
         </div>
         {/* if loading is true then show loadingbox and if error is true show messagebox */}

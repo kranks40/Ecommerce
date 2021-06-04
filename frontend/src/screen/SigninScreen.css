@@ -1,26 +1,30 @@
 .signin__form {
-    max-width: 600px;
-    margin: 0 auto;
+  width: 400px;
+  margin: 0 auto;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  height: fit-content;
+  padding: 10px;
 }
 
+
 .signin__form > div {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .signin__form label {
-    margin: 10px 0;
-    display: block;
+  margin: 10px 0;
+  display: block;
 }
 
-/* .login__button button {
-    border-radius: 5px;
-    height: 50px;
-    text-transform: inherit;
-    border: 1px solid;
+.signin__form .disclaimer {
+  font-size: 12px;
+  text-align: justify;
 }
 
-.login__button button:hover {
-    background-color: #F2C85F;
-} */
+.signin__form .signin {
+  align-items: center;
+  /* justify-content: center; */
+}

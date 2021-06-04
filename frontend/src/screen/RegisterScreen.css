@@ -1,26 +1,23 @@
 .register__form {
-    max-width: 600px;
-    margin: 0 auto;
+  width: 400px;
+  margin: 0 auto;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  height: fit-content;
+  padding: 10px;
 }
 
 .register__form > div {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .register__form label {
-    margin: 10px 0;
-    display: block;
+  margin: 10px 0;
+  display: block;
 }
 
-/* .register__button > button {
-    border-radius: 5px;
-    height: 40px;
-    text-transform: inherit;
-    border: 1px solid;
-}
-
-.register__button > button:hover {
-    background-color: #F2C85F;
-} */
+.register__form .register {
+    align-items: center;
+  }

@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import config from "./config.js";
 import express from "express";
 import mongoose from "mongoose";
 import path from "path";
