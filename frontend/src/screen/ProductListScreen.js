@@ -143,6 +143,7 @@ function ProductListScreen(props) {
                     </Button>
 
                     <Button
+                      disabled={sellerMode}
                       type="button"
                       variant="contained"
                       className="small-delete"
