@@ -1,8 +1,11 @@
 .card {
+  object-fit: contain;
+  max-width: 210px;
+  max-height: inherit;
   border: 1px #c0c0c0 solid;
   background-color: #f8f8f8;
-  border-radius: 5px;
-  margin: 10px;
+  border-radius: 15px;
+  margin: 5px;
   transition: transform 150ms ease-in-out;
 }
 
@@ -15,22 +18,15 @@
 }
 
 .card-body > * {
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
-
-/* .home { 
-  width: 100%;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-  z-index: -1;
-  margin-bottom: -150px;
-} */
 
 /* Carousel */
 .carousel .slide img {
-  background-color: black;
-  max-width: 100%;
+  position: relative;
+  width: 50%;
   height: 300px;
-  object-fit: contain;
+  object-fit: fill;
 }
 
 /* pagination */
@@ -46,5 +42,12 @@
 }
 
 .pagination a.active {
-  font-weight:bolder;
+  font-weight: bolder;
+}
+  
+.carousel {
+  z-index: 20;
+  margin-bottom: 0;
+  mask-image: linear-gradient(to bottom, blue to transparent );
+
 }

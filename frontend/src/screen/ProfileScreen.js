@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProfileScreen.css";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import Axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { detailsUser, updateUserProfile } from "../actions/userActions";
@@ -64,6 +65,29 @@ function ProfileScreen() {
           sellerDescription,
         })
       );
+    }
+  };
+
+  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [errorUpload, setErrorUpload] = useState("");
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("image", file);
+    setLoadingUpload(true);
+    try {
+      const { data } = await Axios.post("/api/uploads/s3", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      setSellerLogo(data);
+      setLoadingUpload(false);
+    } catch (error) {
+      setErrorUpload(error.message);
+      setLoadingUpload(false);
     }
   };
 
@@ -141,6 +165,7 @@ function ProfileScreen() {
                     type="text"
                     id="sellerName"
                     placeholder="Enter Seller Name"
+                    required
                     value={sellerName}
                     onChange={(e) => setSellerName(e.target.value)}
                   ></input>
@@ -152,9 +177,24 @@ function ProfileScreen() {
                     type="text"
                     id="sellerLogo"
                     placeholder="Enter Seller Logo"
+                    required
                     value={sellerLogo}
                     onChange={(e) => setSellerLogo(e.target.value)}
                   ></input>
+                </div>
+
+                <div>
+                  <label htmlFor="imagefile">Logo</label>
+                  <input
+                    type="file"
+                    id="imagefile"
+                    label="Choose Image"
+                    onChange={uploadFileHandler}
+                  ></input>
+                  {loadingUpload && <LoadingBox></LoadingBox>}
+                  {errorUpload && (
+                    <MessageBox variant="danger">{errorUpload}</MessageBox>
+                  )}
                 </div>
 
                 <div>
@@ -163,6 +203,7 @@ function ProfileScreen() {
                     type="text"
                     id="sellerDescription"
                     placeholder="Enter Seller Description"
+                    required
                     value={sellerDescription}
                     onChange={(e) => setSellerDescription(e.target.value)}
                   ></input>
@@ -171,10 +212,10 @@ function ProfileScreen() {
             )}
 
             <div>
-              <label/>
-                <button className="primary" type="submit">
-                  Update
-                </button>
+              <label />
+              <button className="primary" type="submit">
+                Update
+              </button>
             </div>
           </>
         )}

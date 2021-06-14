@@ -47,13 +47,14 @@ function HomeScreen() {
       ) : (
         <>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
+          <div className="carousel">
           <Carousel
-            showArrow={true}
+            autoPlay
+            infiniteLoop
+            showStatus={false}
+            showIndicators={false}
             showThumbs={false}
-            autoPlay={true}
-            autoPlayInterval="9000"
-            autoPlayDirection="ltr"
-            infiniteLoop={true}
+            interval={5000}
           >
             {sellers.map((seller) => (
               <div key={seller._id}>
@@ -64,6 +65,7 @@ function HomeScreen() {
               </div>
             ))}
           </Carousel>
+          </div>
         </>
       )}
       <h2>Featured Products</h2>

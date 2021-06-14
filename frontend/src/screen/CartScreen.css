@@ -1,19 +1,51 @@
-
 img.small {
-    max-width: 50px;
-    width: 100%;
+  max-width: 50px;
+  width: 100%;
 }
 
 .min-30 {
-    min-width: 300px;
+  align-content: center;
+  margin: 20px;
+  flex: 1;
+  min-width: 300px;
 }
 
 .delete {
-    font-size: 25px !important;
-    cursor: pointer;
+  font-size: 25px !important;
+  cursor: pointer;
 }
 
 .delete:hover {
-    color: #3CAE2B;
+  color: #3cae2b;
 }
 
+.cart-sub {
+  align-content: center;
+  border: 1px #c0c0c0 solid;
+  background-color: #f8f8f8;
+  margin: 10px;
+  padding: 30px;
+}
+
+.card-cart {
+  flex: end;
+  width: 77%;
+  border: 1px #c0c0c0 solid;
+  background-color: #f8f8f8;
+  margin: 1px;
+  padding: 10px;
+}
+
+.price {
+  font-weight: 550;
+}
+
+.selected > select {
+  border-color: #d5d9d9;
+  border-radius: 8px;
+  color: #0f1111;
+  background: #F0F2F2;
+  margin: 10px;
+  cursor: pointer;
+  display: inline-block;
+}

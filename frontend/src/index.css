@@ -63,23 +63,27 @@ a.brand {
 }
 
 .badge {
-  background-color: #f02020;
-  color: #ffffff;
+  position: absolute;
+  background-color: yellow;
+  color: #000000;
+  font: bold;
   border-radius: 50%;
   padding: 2px 7px;
   font-size: 14px;
-  margin-left: 2px;
+  margin-left: -10px;
 }
+
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
 .row.center {
   justify-content: center;
+  align-content: center;
 }
 
 main {
@@ -95,13 +99,14 @@ footer {
 
 /* Images */
 img {
+  max-height: 100vh;
   border-radius: 5px;
-  object-fit: contain;
+  object-fit: fill;
 }
 
 img.medium {
-  max-width: 190px;
-  width: 100%;
+  max-width: 210px;
+  object-fit: fill;
 }
 
 img.large {
@@ -203,6 +208,8 @@ button.block {
 
 /* Dropdown */
 .dropdown {
+  justify-content: center;
+  align-content: center;
   display: inline-block;
   position: relative;
 }

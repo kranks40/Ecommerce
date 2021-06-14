@@ -1,6 +1,8 @@
 import React from "react";
+import Currency from "react-currency-formatter";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import ClampLines from "react-clamp-lines";
 
 function Product(props) {
   const { product } = props;
@@ -12,7 +14,15 @@ function Product(props) {
       </Link>
       <div className="card-body">
         <Link to={`/product/${product._id}`}>
-          <h2>{product.name}</h2>
+          <ClampLines
+            id="product._id"
+            text={product.name}
+            lines={1}
+            ellipsis="..."
+            moreText="Expand"
+            lessText="Collapse"
+            buttons={false}
+          />
         </Link>
         <Rating
           rating={product.rating}
@@ -20,7 +30,9 @@ function Product(props) {
         ></Rating>
 
         <div className="row">
-          <div className="price">${product.price}</div>
+          <div className="price">
+            <Currency quantity={product.price} currency="XCD" />
+          </div>
           <div>
             <Link to={`/seller/${product.seller._id}`}>
               {product.seller.seller.name}

@@ -66,31 +66,31 @@ function ProductEditScreen(props) {
     );
   };
 
-  const [loadingUpload, setLoadingUpload] = useState(false);
-  const [errorUpload, setErrorUpload] = useState("");
+   const [loadingUpload, setLoadingUpload] = useState(false);
+   const [errorUpload, setErrorUpload] = useState("");
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+   const userSignin = useSelector((state) => state.userSignin);
+   const { userInfo } = userSignin;
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("image", file);
-    setLoadingUpload(true);
-    try {
-      const { data } = await Axios.post("/api/uploads/s3", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      });
-      setImage(data);
-      setLoadingUpload(false);
-    } catch (error) {
-      setErrorUpload(error.message);
-      setLoadingUpload(false);
+   const uploadFileHandler = async (e) => {
+     const file = e.target.files[0];
+     const bodyFormData = new FormData();
+     bodyFormData.append("image", file);
+     setLoadingUpload(true);
+     try {
+       const { data } = await Axios.post("/api/uploads/s3", bodyFormData, {
+         headers: {
+           "Content-Type": "multipart/form-data",
+           Authorization: `Bearer ${userInfo.token}`,
+         },
+       });
+       setImage(data);
+       setLoadingUpload(false);
+     } catch (error) {
+       setErrorUpload(error.message);
+       setLoadingUpload(false);
     }
-  };
+   };
 
   return (
     <div>
@@ -112,8 +112,8 @@ function ProductEditScreen(props) {
                 type="text"
                 id="name"
                 placeholder="Enter Name"
-                value={name}
                 required
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
@@ -124,8 +124,8 @@ function ProductEditScreen(props) {
                 type="text"
                 id="category"
                 placeholder="Enter Category"
-                value={category}
                 required
+                value={category}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
@@ -136,8 +136,8 @@ function ProductEditScreen(props) {
                 type="text"
                 id="image"
                 placeholder="Enter Image"
-                value={image}
                 required
+                value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
@@ -160,8 +160,8 @@ function ProductEditScreen(props) {
                 type="number"
                 id="price"
                 placeholder="Enter Price"
-                value={price}
                 required
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
@@ -172,8 +172,8 @@ function ProductEditScreen(props) {
                 type="number"
                 id="countInStock"
                 placeholder="Enter Stock Amount"
-                value={countInStock}
                 required
+                value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
               ></input>
             </div>
@@ -184,8 +184,8 @@ function ProductEditScreen(props) {
                 type="text"
                 id="brand"
                 placeholder="Enter Brand"
-                value={brand}
                 required
+                value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               ></input>
             </div>
@@ -197,8 +197,8 @@ function ProductEditScreen(props) {
                 rows="3"
                 id="description"
                 placeholder="Enter Description"
-                value={description}
                 required
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>

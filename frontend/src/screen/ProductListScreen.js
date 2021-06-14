@@ -72,7 +72,17 @@ function ProductListScreen(props) {
       dispatch(deleteProduct(product._id));
   };
   const createHandler = () => {
-    dispatch(createProduct());
+    if (!createdProduct) {
+      alert(
+        "Before creating your product you must first complete seller profile"
+      );
+      props.history.push("/profile");
+    }
+    if (createdProduct) {
+      props.history.push("/productList");
+    } else {
+      dispatch(createProduct());
+    }
   };
 
   return (
