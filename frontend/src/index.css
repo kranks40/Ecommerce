@@ -4,8 +4,8 @@ html {
 }
 
 body {
-  background-color: #EAEDED;
-  margin: 0;
+  background-color: #eaeded;
+  margin: 0x;
   height: 100vh;
   font-size: 16px;
   font-family: Helvetica, Arial, sans-serif;
@@ -73,12 +73,11 @@ a.brand {
   margin-left: -10px;
 }
 
-
 .row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .row.center {
@@ -99,13 +98,13 @@ footer {
 
 /* Images */
 img {
-  max-height: 100vh;
+  height: 35vh;
   border-radius: 5px;
-  object-fit: fill;
+  object-fit: contain;
 }
 
 img.medium {
-  max-width: 210px;
+  width: 210px;
   object-fit: fill;
 }
 
@@ -119,6 +118,7 @@ img.large {
 
 /* Rating */
 .rating span {
+  padding: 1px;
   color: #f0c040;
   margin: 1px;
 }
@@ -204,8 +204,6 @@ button.block {
   width: 100%;
 }
 
-
-
 /* Dropdown */
 .dropdown {
   justify-content: center;
@@ -262,5 +260,3 @@ button.block {
   color: #212121;
   background-color: #e57373;
 }
-
-

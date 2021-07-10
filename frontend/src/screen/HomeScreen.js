@@ -48,23 +48,23 @@ function HomeScreen() {
         <>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
           <div className="carousel">
-          <Carousel
-            autoPlay
-            infiniteLoop
-            showStatus={false}
-            showIndicators={false}
-            showThumbs={false}
-            interval={5000}
-          >
-            {sellers.map((seller) => (
-              <div key={seller._id}>
-                <Link to={`/seller/${seller._id}`}>
-                  <img src={seller.seller.logo} alt={seller.seller.name} />
-                  <p className="legend">{seller.seller.name}</p>
-                </Link>
-              </div>
-            ))}
-          </Carousel>
+            <Carousel
+              autoPlay
+              infiniteLoop
+              showStatus={false}
+              showIndicators={false}
+              showThumbs={false}
+              interval={3000}
+            >
+              {sellers.map((seller) => (
+                <div key={seller._id}>
+                  <Link to={`/seller/${seller._id}`}>
+                    <img src={seller.seller.logo} alt ={seller.seller.name} />
+                    <h1>{seller.seller.name}</h1>
+                  </Link>
+                </div>
+              ))}
+            </Carousel>
           </div>
         </>
       )}
@@ -78,7 +78,7 @@ function HomeScreen() {
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <div className="row center">
+          <div className="row">
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}

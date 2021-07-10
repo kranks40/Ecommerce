@@ -9,7 +9,7 @@ const data = {
       isAdmin: true,
       isSeller: true,
       seller: {
-        name: "Puma",
+        name: "Admin",
         logo: "/images/logo1.png",
         description: "best seller",
         rating: 4.5,
@@ -27,8 +27,7 @@ const data = {
     {
       name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptopsk",
       category: "men's clothing",
-      image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      // image: "/images/Fjallraven.jpg",
+      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
       price: 109.96,
       countInStock: 5,
       brand: "Fjallraven",
@@ -112,11 +111,11 @@ const data = {
     {
       name: "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED",
       category: "electronics",
-      image: "/images/Samsung.jpg",
+      image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
       price: 999.99,
       countInStock: 5,
       brand: "Samsung",
-      rating: 4.5,
+      rating: 5.5,
       numReviews: 10,
       description:
         "49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag.",
@@ -132,6 +131,78 @@ const data = {
       numReviews: 10,
       description:
         "49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag.",
+    },
+    {
+      name: "Opna Women's Short Sleeve Moisture",
+      category: "Women's clothing",
+      image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
+      price: 7.95,
+      countInStock: 5,
+      brand: "Opna",
+      rating: 4.5,
+      numReviews: 1,
+      description:
+        "100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort",
+    },
+    {
+      name: "DANVOUY Womens T Shirt Casual Cotton Short",
+      category: "Women's clothing",
+      image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+      price: 12.99,
+      countInStock: 5,
+      brand: "Danvouy",
+      rating: 4.5,
+      numReviews: 2,
+      description:
+        "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter",
+    },
+    {
+      name: "MBJ Women's Solid Short Sleeve Boat Neck V",
+      category: "Women's clothing",
+      image: "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
+      price: 9.85,
+      countInStock: 5,
+      brand: "MBJ",
+      rating: 4.5,
+      numReviews: 2,
+      description:
+        "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+    },
+    {
+      name: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
+      category: "Women's clothing",
+      image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
+      price: 39.99,
+      countInStock: 5,
+      brand: "MBJ",
+      rating: 1.5,
+      numReviews: 3,
+      description:
+        "Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look",
+    },
+    {
+      name: "Pierced Owl Rose Gold Plated Stainless Steel Double",
+      category: "jewelery",
+      image: "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
+      price: 10.99,
+      countInStock: 5,
+      brand: "Pierced Owl",
+      rating: 1.5,
+      numReviews: 3,
+      description:
+        "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
+    },
+    {
+      name: "White Gold Plated Princess",
+      category: "jewelery",
+      image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+      price: 10.99,
+      countInStock: 5,
+      brand: "White Gold",
+      rating: 1.5,
+      numReviews: 3,
+      description:
+        "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
     },
   ],
 };
