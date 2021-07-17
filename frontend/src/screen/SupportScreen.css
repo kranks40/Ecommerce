@@ -4,7 +4,6 @@
 
 .support-users {
     background: #f0f0f0;
-    height: 100%;
 }
 
 .support-users button {
@@ -37,7 +36,6 @@
 
 .support-messages ul {
     height: calc(100vh - 180px);
-    max-height: calc(100vh - 180px);
     overflow: scroll;
 }
 

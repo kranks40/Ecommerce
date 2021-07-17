@@ -1,3 +1,0 @@
-heroku config:set MONGODB_URL="mongodb+srv://amazona1:amazona@cluster0.5sjw4.mongodb.net/amazona?retryWrites=true&w=majority"
-
-heroku config:set SKIP_PREFLIGHT_CHECK=true
