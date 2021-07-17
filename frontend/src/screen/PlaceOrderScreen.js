@@ -66,7 +66,7 @@ function PlaceOrderScreen({ history }) {
               <div className="placeOrder">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong>
+                  <strong>Method:</strong>{" "}
                   {cart.paymentMethod}
                 </p>
               </div>

@@ -1,13 +1,11 @@
 img.small {
-  max-width: 50px;
-  width: 100%;
+  width: 70px;
 }
 
 .min-30 {
   align-content: center;
   margin: 20px;
   flex: 1;
-  min-width: 300px;
 }
 
 .delete {
@@ -23,17 +21,17 @@ img.small {
   align-content: center;
   border: 1px #c0c0c0 solid;
   background-color: #f8f8f8;
-  margin: 10px;
+  margin: 5px;
   padding: 30px;
 }
 
 .card-cart {
-  flex: end;
-  width: 77%;
+  align-content: space-between;
+  width: 60%;
   border: 1px #c0c0c0 solid;
   background-color: #f8f8f8;
-  margin: 1px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .price {
@@ -49,3 +47,4 @@ img.small {
   cursor: pointer;
   display: inline-block;
 }
+

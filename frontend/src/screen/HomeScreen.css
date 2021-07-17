@@ -1,11 +1,10 @@
 .card {
   object-fit: contain;
-  width: 210px;
-  /* height: inherit; */
+  width: 220px;
   border: 1px #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 1px;
-  margin: 2px;
+  margin: 10px;
   transition: transform 150ms ease-in-out;
 }
 
@@ -19,6 +18,7 @@
 
 .card-body > * {
   margin-bottom: 5px;
+  margin-TOP: 10px;
 }
 
 /* Carousel */

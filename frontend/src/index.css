@@ -5,7 +5,7 @@ html {
 
 body {
   background-color: #eaeded;
-  margin: 0x;
+  margin: 0px;
   height: 100vh;
   font-size: 16px;
   font-family: Helvetica, Arial, sans-serif;
@@ -98,18 +98,18 @@ footer {
 
 /* Images */
 img {
-  height: 35vh;
-  border-radius: 5px;
+  height: 25vh;
+  border-radius: 1px;
   object-fit: contain;
 }
 
 img.medium {
-  width: 210px;
+  width: 220px;
   object-fit: fill;
 }
 
 img.large {
-  width: 90%;
+  width: 100%;
 }
 
 .price {
